@@ -1,5 +1,5 @@
 package main;
-//hi
+
 public class GenericSearchAlgorithm {
 
 	public static TreeNode search(SearchStrategy searchStrategy,

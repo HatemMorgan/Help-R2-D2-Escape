@@ -1,32 +1,35 @@
 package search_strategies;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import main.SearchStrategy;
 import main.TreeNode;
 
 public class BFS implements SearchStrategy {
+	private Queue<TreeNode> bfsQueue = new LinkedList<TreeNode>();
+	
 	@Override
 	public void queuingFunc(TreeNode[] expandedNodes) {
-		// TODO Auto-generated method stub
+		for (TreeNode node : expandedNodes)
+			bfsQueue.add(node);
 	}
 
 	@Override
 	public Collection<TreeNode> getQueuingDataStructure() {
-		// TODO Auto-generated method stub
-		return null;
+		return bfsQueue;
 	}
 
 	@Override
 	public void addInitialState(TreeNode root) {
-		// TODO Auto-generated method stub
+		bfsQueue.add(root);
 
 	}
 
 	@Override
 	public TreeNode remove() {
-		// TODO Auto-generated method stub
-		return null;
+		return bfsQueue.remove();
 	}
 
 }
