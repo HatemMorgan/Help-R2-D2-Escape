@@ -113,7 +113,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 				//======================================================================================
 				// above the agent their exist a free space or pressure pad or teleportal		 
 				//======================================================================================
-			}else if (state.getY() >= 1  &&
+			}else if (state.getX() >= 1  &&
 								(grid[state.getX()-1][state.getY()] == GridObjects.FreeSpace || grid[state.getX()-1][state.getY()] == GridObjects.PressurePad || grid[state.getX()-1][state.getY()] == GridObjects.Teleportal)){
 				
 						//======================================================================================
@@ -136,11 +136,11 @@ public class HelpR2D2 extends GenericSearchProblem {
 						
 						switch(grid[state.getX()-1][state.getY()]){
 						// place above agent was on a free space
-						case FreeSpace : newGridObj.getGrid()[state.getX()][state.getY() -1] = GridObjects.Agent; break;
+						case FreeSpace : newGridObj.getGrid()[state.getX()-1][state.getY()] = GridObjects.Agent; break;
 						// place above agent was on pressure pad
-						case PressurePad : newGridObj.getGrid()[state.getX()][state.getY() -1 ] = GridObjects.AgentPressurePad;  	break;
+						case PressurePad : newGridObj.getGrid()[state.getX()-1][state.getY()] = GridObjects.AgentPressurePad;  	break;
 						// place above agent was on a teleportal
-						case Teleportal : newGridObj.getGrid()[state.getX()][state.getY() -1] = GridObjects.AgentTeleprotal; break;
+						case Teleportal : newGridObj.getGrid()[state.getX()-1][state.getY()] = GridObjects.AgentTeleprotal; break;
 						
 						default : break;
 					}
@@ -467,7 +467,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 					//======================================================================================
 					// left the agent their exist a free space or pressure pad or teleportal		 
 					//======================================================================================
-				}else if (state.getX() >= 1  &&
+				}else if (state.getY() >= 1  &&
 								(grid[state.getX()][state.getY()-1] == GridObjects.FreeSpace || grid[state.getX()][state.getY()-1] == GridObjects.PressurePad || grid[state.getX()][state.getY()-1] == GridObjects.Teleportal)){
 						//======================================================================================
 						// checking place of Agent and update its current place after moving the agent in the west direction

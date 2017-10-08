@@ -46,7 +46,6 @@ public class GenericSearchAlgorithm {
 	    TreeNode goal =  search(dfs, help, false );
 	    System.out.println(goal.getDepth()+" "+goal.getDepth()+" "+goal.getParent()+" "+ goal.getState());
 		
-		
 	}
 }
 
