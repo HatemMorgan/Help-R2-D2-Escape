@@ -8,7 +8,8 @@ public class Grid implements Cloneable {
 	private GridObjects[][] grid;
 	private int[] agentInitialPos;
 	private int[] teleportalPos;
-
+    private int RocksNum;
+  
 	public Grid() {
 		GenGrid();
 	}
@@ -38,7 +39,8 @@ public class Grid implements Cloneable {
 		int FreeSpaces = RandomNumber(1, totalCells - 3 + 1);
 		totalCells -= FreeSpaces;
 		int Pressure = RandomNumber(1, (totalCells - 1) / 2 + 1);
-		int Rocks = Pressure;
+	    int Rocks = Pressure;
+	    RocksNum = Rocks;
 		totalCells -= Pressure * 2;
 		int Obstacles = RandomNumber(1, totalCells + 1);
 		FreeSpaces += totalCells - Obstacles;
@@ -95,6 +97,10 @@ public class Grid implements Cloneable {
 
 			}
 		}
+	}
+
+	public int getRocks() {
+		return RocksNum;
 	}
 
 	private int RandomNumber(int low, int high) {
