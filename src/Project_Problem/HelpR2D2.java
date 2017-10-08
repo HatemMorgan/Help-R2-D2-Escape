@@ -49,6 +49,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 		// if in a row that there exist a rock above it(agent) and there is no free space or pressure pad above it(rock)
 		if (state.getX() == minX
 				|| (state.getX() != minX && grid[state.getX()-1][state.getY()] == GridObjects.Obstacle)
+				||(state.getX() == 1 && (grid[state.getX()-1][state.getY()] == GridObjects.Rock || grid[state.getX()-1][state.getY()] == GridObjects.RockPressurePad || grid[state.getX()-1][state.getY()] == GridObjects.RockTeleportal) )
 				|| (state.getX() >= 2  &&  
 						(grid[state.getX()-1][state.getY()] == GridObjects.Rock || grid[state.getX()-1][state.getY()] == GridObjects.RockTeleportal || grid[state.getX()-1][state.getY()] == GridObjects.RockPressurePad) && 
 							 (grid[state.getX()-2][state.getY()] != GridObjects.FreeSpace || grid[state.getX()-2][state.getY()] != GridObjects.PressurePad || grid[state.getX()-2][state.getY()] != GridObjects.Teleportal ))) {
@@ -167,6 +168,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 		// if in a row that there exist a rock down it(agent) and there is no free space or pressure pad or teleportal down it(rock)
 		if (state.getX() == maxX
 				|| (state.getX() != maxX && grid[state.getX()+1][state.getY()] == GridObjects.Obstacle)
+				||(state.getX() == maxX-1 && (grid[state.getX()+1][state.getY()] == GridObjects.Rock || grid[state.getX()+1][state.getY()] == GridObjects.RockPressurePad || grid[state.getX()+1][state.getY()] == GridObjects.RockTeleportal) )
 				|| (state.getX() <= maxX -2  &&  
 						(grid[state.getX()+1][state.getY()] == GridObjects.Rock || grid[state.getX()+1][state.getY()] == GridObjects.RockTeleportal || grid[state.getX()+1][state.getY()] == GridObjects.RockPressurePad) && 
 							 (grid[state.getX()+2][state.getY()] != GridObjects.FreeSpace || grid[state.getX()+2][state.getY() ] != GridObjects.PressurePad || grid[state.getX()+2][state.getY()] != GridObjects.Teleportal ))) {
@@ -284,6 +286,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 		// if in a row that there exist a rock right to it(agent) and there is no free space or pressure pad or teleportal right to rock
 		if (state.getY() == maxY
 				|| (state.getY() != maxY && grid[state.getX()][state.getY()+1] == GridObjects.Obstacle)
+				||(state.getY() == maxY-1 && (grid[state.getX()][state.getY()+1] == GridObjects.Rock || grid[state.getX()][state.getY()+1] == GridObjects.RockPressurePad || grid[state.getX()][state.getY()+1] == GridObjects.RockTeleportal) )
 				|| (state.getY() <= maxY -2  &&  
 						(grid[state.getX()][state.getY()+1] == GridObjects.Rock || grid[state.getX()][state.getY()+1] == GridObjects.RockTeleportal || grid[state.getX()][state.getY()+1] == GridObjects.RockPressurePad) && 
 							 (grid[state.getX()][state.getY()+2] != GridObjects.FreeSpace || grid[state.getX()][state.getY()+2] != GridObjects.PressurePad || grid[state.getX()][state.getY()+2] != GridObjects.Teleportal ))) {
@@ -402,6 +405,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 		// if in a row that there exist a rock left to it(agent) and there is no free space or pressure pad or teleprotal left to rock
 		if (state.getY() == minY
 				|| (state.getY() != minY && grid[state.getX()][state.getY()-1] == GridObjects.Obstacle)
+				||(state.getY() == 1 && (grid[state.getX()][state.getY()-1] == GridObjects.Rock || grid[state.getX()][state.getY()-1] == GridObjects.RockPressurePad || grid[state.getX()][state.getY()-1] == GridObjects.RockTeleportal) )
 				|| (state.getY() >= 2 &&  
 						(grid[state.getX()][state.getY()-1] == GridObjects.Rock || grid[state.getX()][state.getY()-1] == GridObjects.RockTeleportal || grid[state.getX()][state.getY()-1] == GridObjects.RockPressurePad) && 
 							 (grid[state.getX()][state.getY()-2] != GridObjects.FreeSpace || grid[state.getX()][state.getY()-2] != GridObjects.PressurePad || grid[state.getX()][state.getY()-2] != GridObjects.Teleportal ))) {
