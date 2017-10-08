@@ -8,7 +8,7 @@ import main.SearchStrategy;
 import main.TreeNode;
 
 public class BFS implements SearchStrategy {
-	private Queue<TreeNode> bfsQueue = new LinkedList<TreeNode>();
+	static Queue<TreeNode> bfsQueue = new LinkedList<TreeNode>();
 	
 	@Override
 	public void queuingFunc(TreeNode[] expandedNodes) {
