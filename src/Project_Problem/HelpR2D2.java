@@ -57,7 +57,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 				||(state.getX() == 1 && (state.getGrid()[state.getX()-1][state.getY()] == GridObjects.Rock || state.getGrid()[state.getX()-1][state.getY()] == GridObjects.RockPressurePad || state.getGrid()[state.getX()-1][state.getY()] == GridObjects.RockTeleportal) )
 				|| (state.getX() >= 2  &&  
 						(state.getGrid()[state.getX()-1][state.getY()] == GridObjects.Rock || state.getGrid()[state.getX()-1][state.getY()] == GridObjects.RockTeleportal || state.getGrid()[state.getX()-1][state.getY()] == GridObjects.RockPressurePad) && 
-							 (state.getGrid()[state.getX()-2][state.getY()] != GridObjects.FreeSpace || state.getGrid()[state.getX()-2][state.getY()] != GridObjects.PressurePad || state.getGrid()[state.getX()-2][state.getY()] != GridObjects.Teleportal ))) {
+							 (state.getGrid()[state.getX()-2][state.getY()] != GridObjects.FreeSpace && state.getGrid()[state.getX()-2][state.getY()] != GridObjects.PressurePad && state.getGrid()[state.getX()-2][state.getY()] != GridObjects.Teleportal ))) {
 						return state;
 		} else {
 			
@@ -175,7 +175,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 				||(state.getX() == maxX-1 && (state.getGrid()[state.getX()+1][state.getY()] == GridObjects.Rock || state.getGrid()[state.getX()+1][state.getY()] == GridObjects.RockPressurePad || state.getGrid()[state.getX()+1][state.getY()] == GridObjects.RockTeleportal) )
 				|| (state.getX() <= maxX -2  &&  
 						(state.getGrid()[state.getX()+1][state.getY()] == GridObjects.Rock || state.getGrid()[state.getX()+1][state.getY()] == GridObjects.RockTeleportal || state.getGrid()[state.getX()+1][state.getY()] == GridObjects.RockPressurePad) && 
-							 (state.getGrid()[state.getX()+2][state.getY()] != GridObjects.FreeSpace || state.getGrid()[state.getX()+2][state.getY() ] != GridObjects.PressurePad || state.getGrid()[state.getX()+2][state.getY()] != GridObjects.Teleportal ))) {
+							 (state.getGrid()[state.getX()+2][state.getY()] != GridObjects.FreeSpace && state.getGrid()[state.getX()+2][state.getY() ] != GridObjects.PressurePad && state.getGrid()[state.getX()+2][state.getY()] != GridObjects.Teleportal ))) {
 						return state;
 		} else {
 			
@@ -291,7 +291,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 				||(state.getY() == maxY-1 && (state.getGrid()[state.getX()][state.getY()+1] == GridObjects.Rock || state.getGrid()[state.getX()][state.getY()+1] == GridObjects.RockPressurePad || state.getGrid()[state.getX()][state.getY()+1] == GridObjects.RockTeleportal) )
 				|| (state.getY() <= maxY -2  &&  
 						(state.getGrid()[state.getX()][state.getY()+1] == GridObjects.Rock || state.getGrid()[state.getX()][state.getY()+1] == GridObjects.RockTeleportal || state.getGrid()[state.getX()][state.getY()+1] == GridObjects.RockPressurePad) && 
-							 (state.getGrid()[state.getX()][state.getY()+2] != GridObjects.FreeSpace || state.getGrid()[state.getX()][state.getY()+2] != GridObjects.PressurePad || state.getGrid()[state.getX()][state.getY()+2] != GridObjects.Teleportal ))) {
+							 (state.getGrid()[state.getX()][state.getY()+2] != GridObjects.FreeSpace && state.getGrid()[state.getX()][state.getY()+2] != GridObjects.PressurePad && state.getGrid()[state.getX()][state.getY()+2] != GridObjects.Teleportal ))) {
 
 						return state;
 		} else {
@@ -409,7 +409,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 				||(state.getY() == 1 && (state.getGrid()[state.getX()][state.getY()-1] == GridObjects.Rock || state.getGrid()[state.getX()][state.getY()-1] == GridObjects.RockPressurePad || state.getGrid()[state.getX()][state.getY()-1] == GridObjects.RockTeleportal) )
 				|| (state.getY() >= 2 &&  
 						(state.getGrid()[state.getX()][state.getY()-1] == GridObjects.Rock || state.getGrid()[state.getX()][state.getY()-1] == GridObjects.RockTeleportal || state.getGrid()[state.getX()][state.getY()-1] == GridObjects.RockPressurePad) && 
-							 (state.getGrid()[state.getX()][state.getY()-2] != GridObjects.FreeSpace || state.getGrid()[state.getX()][state.getY()-2] != GridObjects.PressurePad || state.getGrid()[state.getX()][state.getY()-2] != GridObjects.Teleportal ))) {
+							 (state.getGrid()[state.getX()][state.getY()-2] != GridObjects.FreeSpace && state.getGrid()[state.getX()][state.getY()-2] != GridObjects.PressurePad && state.getGrid()[state.getX()][state.getY()-2] != GridObjects.Teleportal ))) {
 
 						return state;
 		} else {
