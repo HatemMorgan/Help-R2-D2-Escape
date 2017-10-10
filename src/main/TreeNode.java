@@ -8,6 +8,9 @@ public class TreeNode {
 	private int cost;
 	private String operator;
 
+	// private boolean explored;
+	// private boolean inQueuingDS;
+
 	public TreeNode(TreeNode parent, State state, int depth, int cost,
 			String operator) {
 		this.parent = parent;
