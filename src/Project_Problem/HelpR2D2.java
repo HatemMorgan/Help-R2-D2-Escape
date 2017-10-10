@@ -14,7 +14,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 //	private Grid intialGrid;
 	private GridObjects[][] grid;
 	private int[] agentInitialPos;
-	private int[] teleportalPos;
+	//private int[] teleportalPos;
     private int RocksNum;
 	private int[] teleportalIndexes;
 	
@@ -25,6 +25,16 @@ public class HelpR2D2 extends GenericSearchProblem {
 		GenGrid();
 //		teleportalIndexes = intialGrid.getTeleportalPos();
 		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid));
+	}
+	
+	public HelpR2D2(GridObjects[][] grid, int[] initialPos, int[] telePortal, int numRocks){
+		this.setOperators(new String[] { "S", "E", "W" , "N"});
+		this.grid = grid;
+		this.agentInitialPos = initialPos;
+		this.teleportalIndexes = telePortal;
+		this.RocksNum = numRocks;
+		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid));
+		
 	}
 
 	@Override
@@ -70,6 +80,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 			if(state.getX() >= 2  
 					&& (state.getGrid()[state.getX()-1][state.getY()] == GridObjects.Rock || state.getGrid()[state.getX()-1][state.getY()] == GridObjects.RockPressurePad || state.getGrid()[state.getX()-1][state.getY()] == GridObjects.RockTeleportal)){
 				
+				
 						//======================================================================================
 						// checking place of Agent and update it after the agent moved northly and left this place
 						//======================================================================================
@@ -91,7 +102,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						
 						switch(state.getGrid()[state.getX()-1][state.getY()]){
 						// rock was on a free space
-						case Rock : newGrid[state.getX()][state.getY() -1] = GridObjects.Agent; break;
+						case Rock : newGrid[state.getX() - 1][state.getY()] = GridObjects.Agent; break;
 						// rock was on pressure pad
 						case RockPressurePad : 	newGrid[state.getX()-1][state.getY() ] = GridObjects.AgentPressurePad; remainingRocks++; 	break;
 						// rock was on a teleportal
@@ -114,7 +125,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						default : break;
 					}
 						// return new state
-						return new R2D2State(state.getX()-1, state.getY(),state.getRemainingRocks(),newGrid);
+						return new R2D2State(state.getX()-1, state.getY(), remainingRocks,newGrid);
 				
 				//======================================================================================
 				// above the agent their exist a free space or pressure pad or teleportal		 
@@ -152,7 +163,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 					}
 						
 					// return new state
-					return new R2D2State(state.getX()-1, state.getY(),state.getRemainingRocks(),newGrid);
+					return new R2D2State(state.getX()-1, state.getY(),remainingRocks,newGrid);
 			}
 		}
 		
@@ -232,7 +243,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						default : break;
 					}
 						// return new state
-						return new R2D2State(state.getX()+1, state.getY(),state.getRemainingRocks(),newGrid);
+						return new R2D2State(state.getX()+1, state.getY(),remainingRocks,newGrid);
 				
 				//======================================================================================
 				// down the agent their exist a free space or pressure pad or teleportal		 
@@ -269,7 +280,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 					}
 						
 					// return new state
-					return new R2D2State(state.getX()+1, state.getY(),state.getRemainingRocks(),newGrid);
+					return new R2D2State(state.getX()+1, state.getY(),remainingRocks,newGrid);
 			}
 		}
 		return null;
@@ -349,7 +360,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						default : break;
 					}
 						// return new state
-						return new R2D2State(state.getX(), state.getY()+1,state.getRemainingRocks(),newGrid);
+						return new R2D2State(state.getX(), state.getY()+1,remainingRocks,newGrid);
 				
 				//======================================================================================
 				// right the agent their exist a free space or pressure pad or teleportal		 
@@ -387,7 +398,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 					}
 						
 					// return new state
-					return new R2D2State(state.getX(), state.getY()+1,state.getRemainingRocks(),newGrid);
+					return new R2D2State(state.getX(), state.getY()+1,remainingRocks,newGrid);
 			}
 		}
 		return null;
@@ -467,7 +478,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						default : break;
 					}
 						// return new state
-						return new R2D2State(state.getX(), state.getY()-2,state.getRemainingRocks(),newGrid);
+						return new R2D2State(state.getX(), state.getY()-2,remainingRocks,newGrid);
 				
 					//======================================================================================
 					// left the agent their exist a free space or pressure pad or teleportal		 
@@ -504,7 +515,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 					}
 						
 					// return new state
-					return new R2D2State(state.getX(), state.getY()-1,state.getRemainingRocks(),newGrid);
+					return new R2D2State(state.getX(), state.getY()-1,remainingRocks,newGrid);
 			}
 		}
 		return null;
@@ -530,10 +541,9 @@ public class HelpR2D2 extends GenericSearchProblem {
 		// create a new Tree node
 		for(String operator : this.getOperators()){
 			R2D2State newState = (R2D2State)this.transitionFunction(node.getState(),operator);
-
 				// skip if newState is the same as current state if node(parameter)
-			if(newState.getX()== ((R2D2State)node.getState()).getX() && newState.getY()== ((R2D2State)node.getState()).getY())
-				continue;
+//			if(newState.getX()== ((R2D2State)node.getState()).getX() && newState.getY()== ((R2D2State)node.getState()).getY())
+//				continue;   //repeated states
 			
 			// create a new Tree node
 			// cost and depth are incremented by 1
@@ -624,7 +634,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 					Teleportal--;
 					if (Teleportal == 0) {
 						gridObjects.remove(GridObjects.Teleportal);
-						teleportalPos = new int[] { i, j };
+						teleportalIndexes = new int[] { i, j };
 					}
 					break;
 				}
