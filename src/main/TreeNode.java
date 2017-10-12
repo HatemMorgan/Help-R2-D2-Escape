@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 public class TreeNode {
 
 	private TreeNode parent;
@@ -39,5 +41,29 @@ public class TreeNode {
 	public String getOperator() {
 		return operator;
 	}
+	
+	public String toString(){
+		return toString(this,this.getDepth());
+	}
+
+	private  String toString(TreeNode node,int depth) {
+			// if its the root then stop
+			if(node.getParent() == null)
+				return node.getState().toString();
+			
+			
+				
+			
+			
+			// if it is the goal node
+			if(node.getDepth() == depth){
+				return toString(node.getParent(),depth)+"--- "+node.getOperator()+"-->"+node.getState().toString();
+			}else{
+				return toString(node.getParent(),depth)+"--- "+node.getOperator()+"-->"+node.getState().toString();
+			}
+			
+    }
+	
+	
 
 }

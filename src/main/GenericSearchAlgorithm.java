@@ -17,23 +17,22 @@ public class GenericSearchAlgorithm {
 		 * structure of search strategy
 		 */
 		TreeNode root = new TreeNode(null, problem.getInitialState(), 0, 0,null);
+		((HelpR2D2)problem).printGrid(((R2D2State)root.getState()).getGrid());
+
 		searchStrategy.addInitialState(root);
-		R2D2State stat =(R2D2State) root.getState();
-		int i = 0;
-		int u = 0;
 		while (!searchStrategy.getQueuingDataStructure().isEmpty()) {
-			TreeNode node = searchStrategy.remove();
-//			if(u < 4){
+			TreeNode node = searchStrategy.remove();		
+				System.out.println(node.getOperator());
+				System.out.println(node.getCost()+" "+node.getDepth());
+				System.out.println(((R2D2State)node.getState()).getRemainingRocks());
+				if(node.getParent() != null)
+					((HelpR2D2)problem).printGrid(((R2D2State)node.getParent().getState()).getGrid());
+				System.out.println();
 				((HelpR2D2)problem).printGrid(((R2D2State)node.getState()).getGrid());
-//				System.out.println(" "+node.getOperator());
-//				System.out.println(((R2D2State)node.getState()).getRemainingRocks());
-//				System.out.println("X & Y" + " " + ((R2D2State)node.getState()).getX() + " " + ((R2D2State)node.getState()).getY());
-//				u++;
-//				
-//			}
+			
 			
 			if (problem.goalTest(node.getState())){
-				System.out.println("goal");
+//				System.out.println("goal");
 				return node;
 			}else {
 //				TreeNode[] ex = problem.expand(node);
@@ -45,6 +44,7 @@ public class GenericSearchAlgorithm {
 //				i++;
 //				}
 				searchStrategy.queuingFunc(problem.expand(node));
+//				System.out.println(searchStrategy.getQueuingDataStructure().toString());
 			}
 		}
 
@@ -57,12 +57,31 @@ public class GenericSearchAlgorithm {
 //		TreeNode goal =  search(dfs, help, false );
 //	    System.out.println(goal.getDepth()+" "+goal.getDepth()+" "+goal.getParent()+" "+ goal.getState());
 		
-		SearchStrategy dfs = new BFS();
-		GridObjects[][] g = new GridObjects[][]{{GridObjects.PressurePad},{GridObjects.Teleportal},{GridObjects.Rock},{GridObjects.Agent}};
-		HelpR2D2 help = new HelpR2D2(g,new int[]{3,0},new int[]{1,0},1);
-		TreeNode goal =  search(dfs, help, false );
-	    System.out.println(goal.getDepth()+" "+goal.getDepth()+" "+goal.getParent()+" "+ goal.getState());
+//		SearchStrategy dfs = new BFS();
+//		SearchStrategy dfs =new UniformCost();
+//		GridObjects[][] g = new GridObjects[][]{{GridObjects.PressurePad},{GridObjects.Teleportal},{GridObjects.Rock},{GridObjects.Agent}};
+//		HelpR2D2 help = new HelpR2D2(g,new int[]{3,0},new int[]{1,0},1);
+//		TreeNode goal =  search(dfs, help, false );
+//	    System.out.println(goal.getDepth()+" "+goal.getDepth()+" "+goal.getParent()+" "+ goal.getState());
 		
+		
+		
+		GridObjects[][] g = new GridObjects[][]{{GridObjects.Agent,GridObjects.Rock,GridObjects.PressurePad},
+																		   {GridObjects.FreeSpace,GridObjects.Rock,GridObjects.Obstacle},
+																		   {GridObjects.Teleportal,GridObjects.PressurePad,GridObjects.FreeSpace}};
+		HelpR2D2 help = new HelpR2D2(g,new int[]{0,0},new int[]{2,0},2);
+		
+//		SearchStrategy uniformCost = new UniformCost();
+//		TreeNode goal =  search(uniformCost, help, false );
+		
+//		SearchStrategy bfs = new BFS();
+//		TreeNode goal =  search(bfs, help, false );
+
+		SearchStrategy dfs = new DFS();
+		TreeNode goal =  search(dfs, help, false );
+		
+	    System.out.println(goal.getDepth()+" "+goal.getDepth()+" "+" "+ goal.getState());
+	    System.out.println(goal.toString());
 		
 	}
 }

@@ -1,5 +1,7 @@
 package Project_Problem;
 
+import java.util.Arrays;
+
 import main.State;
 
 public class R2D2State extends State {
@@ -37,5 +39,15 @@ public class R2D2State extends State {
 	public  GridObjects[][] getGrid(){
 		return grid;
 	}
+
+	@Override
+	public String toString() {
+		return "R2D2State [x=" + x + ", y=" + y + ", remainingRocks="
+				+ remainingRocks + "]";
+	}
+
+	
+	
+	
 
 }

@@ -48,7 +48,13 @@ public class UniformCost implements SearchStrategy {
 
 		@Override
 		public int compare(TreeNode node1, TreeNode node2) {
-				return node2.getCost() - node1.getCost();
+				// return difference if they are not equal
+				if(node1.getCost() != node2.getCost()){
+					return node1.getCost() - node2.getCost();
+				}else{
+					// if they are equal so order them by less depth one
+					return node1.getDepth() - node2.getDepth();
+				}
 		}
 	};
 

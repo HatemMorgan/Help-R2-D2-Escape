@@ -13,7 +13,8 @@ public class BFS implements SearchStrategy {
 	@Override
 	public void queuingFunc(TreeNode[] expandedNodes) {
 		for (TreeNode node : expandedNodes)
-			bfsQueue.add(node);
+			if(node != null)
+				bfsQueue.add(node);
 	}
 
 	@Override

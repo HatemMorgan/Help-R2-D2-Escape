@@ -542,8 +542,8 @@ public class HelpR2D2 extends GenericSearchProblem {
 		for(String operator : this.getOperators()){
 			R2D2State newState = (R2D2State)this.transitionFunction(node.getState(),operator);
 				// skip if newState is the same as current state if node(parameter)
-//			if(newState.getX()== ((R2D2State)node.getState()).getX() && newState.getY()== ((R2D2State)node.getState()).getY())
-//				continue;   //repeated states
+			if(newState.getX()== ((R2D2State)node.getState()).getX() && newState.getY()== ((R2D2State)node.getState()).getY())
+				continue;   //repeated states
 			
 			// create a new Tree node
 			// cost and depth are incremented by 1

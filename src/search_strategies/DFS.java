@@ -16,6 +16,7 @@ public class DFS implements SearchStrategy {
 	@Override
 	public void queuingFunc(TreeNode[] expandedNodes) {
 		for(TreeNode N: expandedNodes){
+			if(N != null)
 			DfsQueue.push(N);
 		}
 	}
