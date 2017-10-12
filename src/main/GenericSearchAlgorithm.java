@@ -9,6 +9,9 @@ import search_strategies.IterativeDeepening;
 import search_strategies.UniformCost;
 
 public class GenericSearchAlgorithm {
+	private static final StringBuilder expansionSequenceBuilder = new StringBuilder();
+
+	
 	public static TreeNode search(SearchStrategy searchStrategy,
 			GenericSearchProblem problem, boolean visualize) throws CloneNotSupportedException {
 
@@ -21,7 +24,10 @@ public class GenericSearchAlgorithm {
 
 		searchStrategy.addInitialState(root);
 		while (!searchStrategy.getQueuingDataStructure().isEmpty()) {
-			TreeNode node = searchStrategy.remove();		
+			TreeNode node = searchStrategy.remove();
+			System.out.println(((R2D2State)node.getState()).getX()+","+((R2D2State)node.getState()).getY());
+			// add position of state in removed node from queue
+			expansionSequenceBuilder.append("("+((R2D2State)node.getState()).getX()+","+((R2D2State)node.getState()).getY()+") , ");
 //				System.out.println(node.getOperator());
 //				System.out.println(node.getCost()+" "+node.getDepth());
 //				System.out.println(((R2D2State)node.getState()).getRemainingRocks());
@@ -84,7 +90,7 @@ public class GenericSearchAlgorithm {
 		
 	    System.out.println(goal.getDepth()+" "+goal.getDepth()+" "+" "+ goal.getState());
 	    System.out.println(goal.toString());
-		
+		System.out.println(expansionSequenceBuilder.toString());
 	}
 }
 
