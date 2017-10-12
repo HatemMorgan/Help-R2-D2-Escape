@@ -5,10 +5,10 @@ import Project_Problem.HelpR2D2;
 import Project_Problem.R2D2State;
 import search_strategies.BFS;
 import search_strategies.DFS;
+import search_strategies.IterativeDeepening;
 import search_strategies.UniformCost;
 
 public class GenericSearchAlgorithm {
-
 	public static TreeNode search(SearchStrategy searchStrategy,
 			GenericSearchProblem problem, boolean visualize) throws CloneNotSupportedException {
 
@@ -22,14 +22,13 @@ public class GenericSearchAlgorithm {
 		searchStrategy.addInitialState(root);
 		while (!searchStrategy.getQueuingDataStructure().isEmpty()) {
 			TreeNode node = searchStrategy.remove();		
-				System.out.println(node.getOperator());
-				System.out.println(node.getCost()+" "+node.getDepth());
-				System.out.println(((R2D2State)node.getState()).getRemainingRocks());
-				if(node.getParent() != null)
-					((HelpR2D2)problem).printGrid(((R2D2State)node.getParent().getState()).getGrid());
-				System.out.println();
-				((HelpR2D2)problem).printGrid(((R2D2State)node.getState()).getGrid());
-			
+//				System.out.println(node.getOperator());
+//				System.out.println(node.getCost()+" "+node.getDepth());
+//				System.out.println(((R2D2State)node.getState()).getRemainingRocks());
+//				if(node.getParent() != null)
+//					((HelpR2D2)problem).printGrid(((R2D2State)node.getParent().getState()).getGrid());
+//				System.out.println();
+//				((HelpR2D2)problem).printGrid(((R2D2State)node.getState()).getGrid());
 			
 			if (problem.goalTest(node.getState())){
 //				System.out.println("goal");
@@ -77,8 +76,11 @@ public class GenericSearchAlgorithm {
 //		SearchStrategy bfs = new BFS();
 //		TreeNode goal =  search(bfs, help, false );
 
-		SearchStrategy dfs = new DFS();
-		TreeNode goal =  search(dfs, help, false );
+//		SearchStrategy dfs = new DFS();
+//		TreeNode goal =  search(dfs, help, false );
+		
+		IterativeDeepening iterativeDeepening = new IterativeDeepening();
+		TreeNode goal =  search(iterativeDeepening, help, false );
 		
 	    System.out.println(goal.getDepth()+" "+goal.getDepth()+" "+" "+ goal.getState());
 	    System.out.println(goal.toString());
