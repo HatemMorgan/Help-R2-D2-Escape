@@ -1,21 +1,23 @@
 package Project_Problem;
 
+import java.util.Arrays;
+
 import main.State;
 
 public class R2D2State extends State {
 
 	private int x;
 	private int y;
-	private Grid gridObj;
+	private GridObjects[][] grid;
 	// private boolean rockMoved;
 	private int remainingRocks;
 
-	public R2D2State(int x, int y, int remainingRocks, Grid grid) {
+	public R2D2State(int x, int y, int remainingRocks,  GridObjects[][] grid) {
 		this.x = x;
 		this.y = y;
 		// this.rockMoved = rockMoved;
 		this.remainingRocks = remainingRocks;
-		this.gridObj = grid;
+		this.grid = grid;
 	}
 
 	public int getX() {
@@ -34,8 +36,18 @@ public class R2D2State extends State {
 		return remainingRocks;
 	}
 
-	public Grid getGridObj() {
-		return gridObj;
+	public  GridObjects[][] getGrid(){
+		return grid;
 	}
+
+	@Override
+	public String toString() {
+		return "R2D2State [x=" + x + ", y=" + y + ", remainingRocks="
+				+ remainingRocks + "]";
+	}
+
+	
+	
+	
 
 }

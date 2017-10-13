@@ -5,30 +5,35 @@ import java.util.Collection;
 import main.SearchStrategy;
 import main.TreeNode;
 
+import java.util.Stack;
+
 public class DFS implements SearchStrategy {
 
+   private static Stack<TreeNode> DfsQueue ;
+   public DFS(){
+	   DfsQueue = new Stack<TreeNode>();
+   }
 	@Override
 	public void queuingFunc(TreeNode[] expandedNodes) {
-		// TODO Auto-generated method stub
-		
+		for(TreeNode N: expandedNodes){
+			if(N != null)
+			DfsQueue.push(N);
+		}
 	}
 
 	@Override
 	public Collection<TreeNode> getQueuingDataStructure() {
-		// TODO Auto-generated method stub
-		return null;
+		return DfsQueue;
 	}
 
 	@Override
 	public void addInitialState(TreeNode root) {
-		// TODO Auto-generated method stub
-		
+		DfsQueue.push(root);
 	}
 
 	@Override
 	public TreeNode remove() {
-		// TODO Auto-generated method stub
-		return null;
+		return DfsQueue.pop();
 	}
 
 }
