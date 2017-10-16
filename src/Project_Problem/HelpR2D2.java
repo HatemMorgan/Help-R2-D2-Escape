@@ -3,6 +3,7 @@ package Project_Problem;
 
 import java.lang.invoke.MethodHandles.Lookup;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import main.GenericSearchProblem;
@@ -24,7 +25,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 		this.setOperators(new String[] { "N", "S", "E", "W" });
 		GenGrid();
 //		teleportalIndexes = intialGrid.getTeleportalPos();
-		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid));
+		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid,teleportalIndexes));
 	}
 	
 	public HelpR2D2(GridObjects[][] grid, int[] initialPos, int[] telePortal, int numRocks){
@@ -33,7 +34,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 		this.agentInitialPos = initialPos;
 		this.teleportalIndexes = telePortal;
 		this.RocksNum = numRocks;
-		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid));
+		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid,teleportalIndexes));
 		
 	}
 
@@ -80,7 +81,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 			if(state.getX() >= 2  
 					&& (state.getGrid()[state.getX()-1][state.getY()] == GridObjects.Rock || state.getGrid()[state.getX()-1][state.getY()] == GridObjects.RockPressurePad || state.getGrid()[state.getX()-1][state.getY()] == GridObjects.RockTeleportal)){
 				
-				
+					
 						//======================================================================================
 						// checking place of Agent and update it after the agent moved northly and left this place
 						//======================================================================================
@@ -93,7 +94,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 							// agent was on a pressure pad
 							case AgentPressurePad : newGrid[state.getX()][state.getY()] = GridObjects.PressurePad; break;
 							
-							default : break;
+							default: System.out.println("North first switch error"); break;
 						}
 						
 						//======================================================================================
@@ -108,7 +109,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						// rock was on a teleportal
 						case RockTeleportal : newGrid[state.getX()-1][state.getY()] = GridObjects.AgentTeleprotal; break;
 						
-						default : break;
+						default : System.out.println("North second switch error");  break;
 					}
 						
 						//======================================================================================
@@ -122,10 +123,10 @@ public class HelpR2D2 extends GenericSearchProblem {
 						//  above the rock there exist a  Teleprotal
 						case Teleportal : newGrid[state.getX()-2][state.getY()] = GridObjects.RockTeleportal; break;
 						
-						default : break;
+						default : System.out.println("North third switch error");break;
 					}
 						// return new state
-						return new R2D2State(state.getX()-1, state.getY(), remainingRocks,newGrid);
+						return new R2D2State(state.getX()-1, state.getY(), remainingRocks,newGrid,state.getTeleportalPos());
 				
 				//======================================================================================
 				// above the agent their exist a free space or pressure pad or teleportal		 
@@ -144,7 +145,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 							// agent was on a pressure pad
 							case AgentPressurePad : newGrid[state.getX()][state.getY()] = GridObjects.PressurePad; break;
 							
-							default : break;
+							default : System.out.println("North fourth switch error"); break;
 						}
 						
 						//======================================================================================
@@ -159,14 +160,14 @@ public class HelpR2D2 extends GenericSearchProblem {
 						// place above agent was on a teleportal
 						case Teleportal : newGrid[state.getX()-1][state.getY()] = GridObjects.AgentTeleprotal; break;
 						
-						default : break;
+						default :System.out.println("North fifth switch error"); break;
 					}
 						
 					// return new state
-					return new R2D2State(state.getX()-1, state.getY(),remainingRocks,newGrid);
+					return new R2D2State(state.getX()-1, state.getY(),remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
-		
+//		System.out.println("error North ---> "); printGrid(state.getGrid());
 		return null;
 	}
 	
@@ -199,6 +200,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 			if(state.getX() <= maxX-2  
 					&& (state.getGrid()[state.getX()+1][state.getY()] == GridObjects.Rock || state.getGrid()[state.getX()+1][state.getY()] == GridObjects.RockPressurePad || state.getGrid()[state.getX()+1][state.getY()] == GridObjects.RockTeleportal)){
 				
+
 						//======================================================================================
 						// checking place of Agent and Upgrade it after the agent moved southly and left this place
 						//======================================================================================
@@ -211,7 +213,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 							// agent was on a pressure pad
 							case AgentPressurePad : newGrid[state.getX()][state.getY()] = GridObjects.PressurePad; break;
 							
-							default : break;
+							default : printGrid(state.getGrid()); System.out.println(state.getX()+" "+state.getY()); System.out.println("South first switch error " + state.getGrid()[state.getX()][state.getY()]);  break;
 						}
 						
 						//======================================================================================
@@ -226,7 +228,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						// rock was on a teleportal
 						case RockTeleportal : newGrid[state.getX()+1][state.getY()] = GridObjects.AgentTeleprotal; break;
 						
-						default : break;
+						default : System.out.println("South second switch error"); break;
 					}
 						
 						//======================================================================================
@@ -240,16 +242,17 @@ public class HelpR2D2 extends GenericSearchProblem {
 						//  down the rock there exist a  Teleportal
 						case Teleportal : newGrid[state.getX()+2][state.getY()] = GridObjects.RockTeleportal; break;
 						
-						default : break;
+						default : System.out.println("South third switch error"); break;
 					}
 						// return new state
-						return new R2D2State(state.getX()+1, state.getY(),remainingRocks,newGrid);
+						return new R2D2State(state.getX()+1, state.getY(),remainingRocks,newGrid,state.getTeleportalPos());
 				
 				//======================================================================================
 				// down the agent their exist a free space or pressure pad or teleportal		 
 				//======================================================================================
 			}else if (state.getX() <= maxX -1  &&
 								(state.getGrid()[state.getX()+1][state.getY()] == GridObjects.FreeSpace || state.getGrid()[state.getX()+1][state.getY()] == GridObjects.PressurePad || state.getGrid()[state.getX()+1][state.getY()] == GridObjects.Teleportal)){
+//					System.out.println("heree");
 						//======================================================================================
 						// checking place of Agent and update its current place after moving the agent in the south direction
 						//======================================================================================			
@@ -261,7 +264,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 							// agent was on a pressure pad
 							case AgentPressurePad : newGrid[state.getX()][state.getY()] = GridObjects.PressurePad; break;
 							
-							default : break;
+							default : System.out.println("South fourth switch error"); break;
 						}
 						
 						//======================================================================================
@@ -276,13 +279,14 @@ public class HelpR2D2 extends GenericSearchProblem {
 						// place down agent was on a teleportal
 						case Teleportal : newGrid[state.getX()+1][state.getY()] = GridObjects.AgentTeleprotal; break;
 						
-						default : break;
+						default : System.out.println("South fifth switch error"); break;
 					}
 						
 					// return new state
-					return new R2D2State(state.getX()+1, state.getY(),remainingRocks,newGrid);
+					return new R2D2State(state.getX()+1, state.getY(),remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
+//		System.out.println("error South ---> "); printGrid(state.getGrid());
 		return null;
 	}
 	
@@ -328,7 +332,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 							// agent was on a pressure pad
 							case AgentPressurePad : newGrid[state.getX()][state.getY()] = GridObjects.PressurePad; break;
 							
-							default : break;
+							default : System.out.println("East first switch error");  break;
 						}
 						
 						//======================================================================================
@@ -343,7 +347,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						// rock was on a teleportal
 						case RockTeleportal : newGrid[state.getX()][state.getY()+1] = GridObjects.AgentTeleprotal; break;
 						
-						default : break;
+						default : System.out.println("East Second switch error"); break;
 					}
 						
 						//======================================================================================
@@ -357,10 +361,10 @@ public class HelpR2D2 extends GenericSearchProblem {
 						//  right the rock there exist a  Teleportal
 						case Teleportal : newGrid[state.getX()][state.getY()+2] = GridObjects.RockTeleportal; break;
 						
-						default : break;
+						default : System.out.println("East Third switch error"); break;
 					}
 						// return new state
-						return new R2D2State(state.getX(), state.getY()+1,remainingRocks,newGrid);
+						return new R2D2State(state.getX(), state.getY()+1,remainingRocks,newGrid,state.getTeleportalPos());
 				
 				//======================================================================================
 				// right the agent their exist a free space or pressure pad or teleportal		 
@@ -379,14 +383,14 @@ public class HelpR2D2 extends GenericSearchProblem {
 							// agent was on a pressure pad
 							case AgentPressurePad : newGrid[state.getX()][state.getY()] = GridObjects.PressurePad; break;
 							
-							default : break;
+							default : System.out.println("East Fourth switch error");  break;
 						}
 						
 						//======================================================================================
 						// checking place of  right the agent and update it after moving the agent in the east direction
 						//======================================================================================
 						
-						switch(state.getGrid()[state.getX()][state.getY()]){
+						switch(state.getGrid()[state.getX()][state.getY()+1]){
 						// place right to agent was on a free space
 						case FreeSpace : newGrid[state.getX()][state.getY()+1] = GridObjects.Agent; break;
 						// place right to agent was on pressure pad
@@ -394,13 +398,14 @@ public class HelpR2D2 extends GenericSearchProblem {
 						// place right to agent was on a teleportal
 						case Teleportal : newGrid[state.getX()][state.getY()+1] = GridObjects.AgentTeleprotal; break;
 						
-						default : break;
+						default :System.out.println("East Fifth switch error " + state.getGrid()[state.getX()][state.getY()] ); break;
 					}
 						
 					// return new state
-					return new R2D2State(state.getX(), state.getY()+1,remainingRocks,newGrid);
+					return new R2D2State(state.getX(), state.getY()+1,remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
+//		System.out.println("error East ---> "); printGrid(state.getGrid());
 		return null;
 	}
 	
@@ -410,8 +415,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 		int minY = 0;
         
 		int remainingRocks = state.getRemainingRocks();
-		
-		
+//		System.out.println(state);
 		// if in the left most row
 		// if in a row that there exist an obstacle left to the agent
 		// if in a row that there exist a rock left to it(agent) and there is no free space or pressure pad or teleprotal left to rock
@@ -446,7 +450,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 							// agent was on a pressure pad
 							case AgentPressurePad : newGrid[state.getX()][state.getY()] = GridObjects.PressurePad; break;
 							
-							default : break;
+							default : System.out.println("West First switch error"); break;
 						}
 						
 						//======================================================================================
@@ -461,7 +465,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						// rock was on a teleportal
 						case RockTeleportal : newGrid[state.getX()][state.getY()-1] = GridObjects.AgentTeleprotal; break;
 						
-						default : break;
+						default : System.out.println("West Second switch error"); break;
 					}
 						
 						//======================================================================================
@@ -475,17 +479,18 @@ public class HelpR2D2 extends GenericSearchProblem {
 						//  left the rock there exist a  Teleportal
 						case Teleportal : newGrid[state.getX()][state.getY()-2] = GridObjects.RockTeleportal; break;
 						
-						default : break;
+						default : System.out.println("West Third switch error"); break;
 					}
 						// return new state
-						return new R2D2State(state.getX(), state.getY()-2,remainingRocks,newGrid);
+						return new R2D2State(state.getX(), state.getY()-1,remainingRocks,newGrid,state.getTeleportalPos());
 				
 					//======================================================================================
 					// left the agent their exist a free space or pressure pad or teleportal		 
 					//======================================================================================
 				}else if (state.getY() >= 1  &&
 								(state.getGrid()[state.getX()][state.getY()-1] == GridObjects.FreeSpace || state.getGrid()[state.getX()][state.getY()-1] == GridObjects.PressurePad || state.getGrid()[state.getX()][state.getY()-1] == GridObjects.Teleportal)){
-						//======================================================================================
+
+					    //======================================================================================
 						// checking place of Agent and update its current place after moving the agent in the west direction
 						//======================================================================================			
 						switch(state.getGrid()[state.getX()][state.getY()]){
@@ -496,7 +501,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 							// agent was on a pressure pad
 							case AgentPressurePad : newGrid[state.getX()][state.getY()] = GridObjects.PressurePad; break;
 							
-							default : break;
+							default : System.out.println("West Fourth switch error"); break;
 						}
 						
 						//======================================================================================
@@ -511,13 +516,14 @@ public class HelpR2D2 extends GenericSearchProblem {
 						// place left to agent was on a teleportal
 						case Teleportal : newGrid[state.getX()][state.getY()-1] = GridObjects.AgentTeleprotal; break;
 						
-						default : break;
+						default : System.out.println("West Fifth switch error"); break;
 					}
 						
 					// return new state
-					return new R2D2State(state.getX(), state.getY()-1,remainingRocks,newGrid);
+					return new R2D2State(state.getX(), state.getY()-1,remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
+//		System.out.println("error West ---> "); printGrid(state.getGrid());
 		return null;
 	}
 
@@ -541,6 +547,10 @@ public class HelpR2D2 extends GenericSearchProblem {
 		// create a new Tree node
 		for(String operator : this.getOperators()){
 			R2D2State newState = (R2D2State)this.transitionFunction(node.getState(),operator);
+//			if(newState == null)
+//				continue;
+//			System.out.println(operator+" "+newState);
+//			System.out.println();
 				// skip if newState is the same as current state if node(parameter)
 			if(newState.getX()== ((R2D2State)node.getState()).getX() && newState.getY()== ((R2D2State)node.getState()).getY())
 				continue;   //repeated states
@@ -563,6 +573,37 @@ public class HelpR2D2 extends GenericSearchProblem {
 		return expandedNodes;
 	}
 
+	public void printGoalPath(TreeNode goal) throws InterruptedException, CloneNotSupportedException{
+		// get list of actions from initial state to goal
+		List<String> actions = new ArrayList<String>();
+		printGoalPathHelp(goal, actions);
+		System.out.println(actions);
+
+		R2D2State state = new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid, teleportalIndexes);
+		printGrid(grid);
+		Thread.sleep(500);
+		System.out.println();
+		
+		// print grid for each action
+		for(int i=actions.size()-1; i >= 0; i--){
+			state = (R2D2State) transitionFunction(state, actions.get(i));
+			printGrid(state.getGrid());
+			Thread.sleep(500);
+			System.out.println();
+		}
+		
+	}
+	
+	private void printGoalPathHelp(TreeNode node, List<String> actions) {
+		// if its the root then stop
+		if(node.getParent() == null){
+			return;
+		}else{
+			actions.add(node.getOperator());
+			printGoalPathHelp(node.getParent(), actions);
+		}
+}
+	
 	@Override
 	public int pathCost() {
 		// TODO Auto-generated method stub
