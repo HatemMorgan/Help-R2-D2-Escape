@@ -60,11 +60,11 @@ private Queue<TreeNode> priorityQueue = new PriorityQueue<TreeNode>(heuristicCom
 		for(int i=0; i<grid.length; i++){
 			for(int j=0;  j<grid[0].length; j++){
 					
-					if(grid[i][j].equals(GridObjects.Rock)){
+					if(grid[i][j].equals(GridObjects.Rock) || grid[i][j].equals(GridObjects.RockTeleportal)){
 							remainingRocks[k1] = new Position(i, j);
 							k1++;
 					}
-					if(grid[i][j].equals(GridObjects.PressurePad)){
+					if(grid[i][j].equals(GridObjects.PressurePad) || grid[i][j].equals(GridObjects.AgentPressurePad)){
 						freePressurePads[k2] = new Position(i, j);
 						k2++;
 					}
