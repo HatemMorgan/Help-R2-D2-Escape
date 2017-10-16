@@ -3,10 +3,8 @@ package main;
 import Project_Problem.GridObjects;
 import Project_Problem.HelpR2D2;
 import Project_Problem.R2D2State;
-import search_strategies.BFS;
-import search_strategies.DFS;
-import search_strategies.IterativeDeepening;
-import search_strategies.UniformCost;
+import search_strategies.*;
+
 
 public class GenericSearchAlgorithm {
 	private static final StringBuilder expansionSequenceBuilder = new StringBuilder();
@@ -85,10 +83,23 @@ public class GenericSearchAlgorithm {
 //		SearchStrategy dfs = new DFS();
 //		TreeNode goal =  search(dfs, help, false );
 		
-		IterativeDeepening iterativeDeepening = new IterativeDeepening();
-		TreeNode goal =  search(iterativeDeepening, help, false );
+//		IterativeDeepening iterativeDeepening = new IterativeDeepening();
+//		TreeNode goal =  search(iterativeDeepening, help, false );
 		
-	    System.out.println(goal.getDepth()+" "+goal.getDepth()+" "+" "+ goal.getState());
+//		GreedyHeuristic1 greedyHeuristic1 = new GreedyHeuristic1(); 
+//		TreeNode goal =  search(greedyHeuristic1, help, false );
+		
+//		GreedyHeuristic2 greedyHeuristic2 = new GreedyHeuristic2(); 
+//		TreeNode goal =  search(greedyHeuristic2, help, false );
+		
+		AStarHeuristic1 aStarHeuristic1 = new AStarHeuristic1();
+		TreeNode goal =  search(aStarHeuristic1, help, false );
+		
+//		AStarHeuristic2 aStarHeuristic2 = new AStarHeuristic2();
+//		TreeNode goal =  search(aStarHeuristic2, help, false );
+
+
+	    System.out.println(goal.getDepth()+" "+goal.getCost()+" "+" "+ goal.getState());
 	    System.out.println(goal.toString());
 		System.out.println(expansionSequenceBuilder.toString());
 	}

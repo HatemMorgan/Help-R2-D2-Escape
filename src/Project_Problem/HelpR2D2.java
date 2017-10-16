@@ -24,7 +24,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 		this.setOperators(new String[] { "N", "S", "E", "W" });
 		GenGrid();
 //		teleportalIndexes = intialGrid.getTeleportalPos();
-		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid));
+		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid,teleportalIndexes));
 	}
 	
 	public HelpR2D2(GridObjects[][] grid, int[] initialPos, int[] telePortal, int numRocks){
@@ -33,7 +33,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 		this.agentInitialPos = initialPos;
 		this.teleportalIndexes = telePortal;
 		this.RocksNum = numRocks;
-		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid));
+		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid,teleportalIndexes));
 		
 	}
 
@@ -125,7 +125,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						default : break;
 					}
 						// return new state
-						return new R2D2State(state.getX()-1, state.getY(), remainingRocks,newGrid);
+						return new R2D2State(state.getX()-1, state.getY(), remainingRocks,newGrid,state.getTeleportalPos());
 				
 				//======================================================================================
 				// above the agent their exist a free space or pressure pad or teleportal		 
@@ -163,7 +163,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 					}
 						
 					// return new state
-					return new R2D2State(state.getX()-1, state.getY(),remainingRocks,newGrid);
+					return new R2D2State(state.getX()-1, state.getY(),remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
 		
@@ -243,7 +243,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						default : break;
 					}
 						// return new state
-						return new R2D2State(state.getX()+1, state.getY(),remainingRocks,newGrid);
+						return new R2D2State(state.getX()+1, state.getY(),remainingRocks,newGrid,state.getTeleportalPos());
 				
 				//======================================================================================
 				// down the agent their exist a free space or pressure pad or teleportal		 
@@ -280,7 +280,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 					}
 						
 					// return new state
-					return new R2D2State(state.getX()+1, state.getY(),remainingRocks,newGrid);
+					return new R2D2State(state.getX()+1, state.getY(),remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
 		return null;
@@ -360,7 +360,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						default : break;
 					}
 						// return new state
-						return new R2D2State(state.getX(), state.getY()+1,remainingRocks,newGrid);
+						return new R2D2State(state.getX(), state.getY()+1,remainingRocks,newGrid,state.getTeleportalPos());
 				
 				//======================================================================================
 				// right the agent their exist a free space or pressure pad or teleportal		 
@@ -398,7 +398,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 					}
 						
 					// return new state
-					return new R2D2State(state.getX(), state.getY()+1,remainingRocks,newGrid);
+					return new R2D2State(state.getX(), state.getY()+1,remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
 		return null;
@@ -478,7 +478,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 						default : break;
 					}
 						// return new state
-						return new R2D2State(state.getX(), state.getY()-2,remainingRocks,newGrid);
+						return new R2D2State(state.getX(), state.getY()-2,remainingRocks,newGrid,state.getTeleportalPos());
 				
 					//======================================================================================
 					// left the agent their exist a free space or pressure pad or teleportal		 
@@ -515,7 +515,7 @@ public class HelpR2D2 extends GenericSearchProblem {
 					}
 						
 					// return new state
-					return new R2D2State(state.getX(), state.getY()-1,remainingRocks,newGrid);
+					return new R2D2State(state.getX(), state.getY()-1,remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
 		return null;
