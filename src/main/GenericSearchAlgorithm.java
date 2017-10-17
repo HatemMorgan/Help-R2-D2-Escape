@@ -11,8 +11,7 @@ import search_strategies.UniformCost;
 public class GenericSearchAlgorithm {
 	private static final StringBuilder expansionSequenceBuilder = new StringBuilder();
 
-	
-	public static TreeNode search(SearchStrategy searchStrategy,
+	waq	 static TreeNode search(SearchStrategy searchStrategy,
 			GenericSearchProblem problem, boolean visualize) throws CloneNotSupportedException {
 
 		/*
