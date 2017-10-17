@@ -14,6 +14,8 @@ public abstract class GenericSearchProblem {
 	
 	public abstract int pathCost();
 	
+	public abstract void  printGoalPath(TreeNode goal) throws InterruptedException, CloneNotSupportedException;
+	
 	public String[] getOperators() {
 		return operators;
 	}

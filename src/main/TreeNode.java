@@ -50,11 +50,7 @@ public class TreeNode {
 			// if its the root then stop
 			if(node.getParent() == null)
 				return node.getState().toString();
-			
-			
 				
-			
-			
 			// if it is the goal node
 			if(node.getDepth() == depth){
 				return toString(node.getParent(),depth)+"--- "+node.getOperator()+"-->"+node.getState().toString();
