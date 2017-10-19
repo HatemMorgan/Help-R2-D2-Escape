@@ -1,17 +1,23 @@
 package search_strategies;
 
 import java.util.Collection;
+import java.util.EmptyStackException;
 
 import main.SearchStrategy;
 import main.TreeNode;
 
 import java.util.Stack;
 
+import Project_Problem.RepeatedStatesController;
+
 public class DFS implements SearchStrategy {
 
    private static Stack<TreeNode> DfsQueue ;
+   private RepeatedStatesController repeatedStatesController;
+	
    public DFS(){
 	   DfsQueue = new Stack<TreeNode>();
+		repeatedStatesController = new RepeatedStatesController();
    }
 	@Override
 	public void queuingFunc(TreeNode[] expandedNodes) {
@@ -31,9 +37,24 @@ public class DFS implements SearchStrategy {
 		DfsQueue.push(root);
 	}
 
+//	@Override
+//	public TreeNode remove() {
+//		return DfsQueue.pop();
+//	}
+
 	@Override
 	public TreeNode remove() {
-		return DfsQueue.pop();
+		TreeNode node;
+		do{
+			try{
+			node = DfsQueue.pop();
+			// if queue is empty then  return null indicating that queue is empty  
+			}catch(EmptyStackException e ){
+				return null;
+			}
+		 }while(repeatedStatesController.isRepeated(node));
+		
+		return node;
 	}
-
+	
 }

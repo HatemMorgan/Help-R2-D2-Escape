@@ -2,13 +2,20 @@ package search_strategies;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 
+import Project_Problem.RepeatedStatesController;
 import main.SearchStrategy;
 import main.TreeNode;
 
 public class BFS implements SearchStrategy {
-	static Queue<TreeNode> bfsQueue = new LinkedList<TreeNode>();
+	private Queue<TreeNode> bfsQueue = new LinkedList<TreeNode>();
+	private RepeatedStatesController repeatedStatesController;
+	
+	public BFS() {
+		repeatedStatesController = new RepeatedStatesController();
+	}
 	
 	@Override
 	public void queuingFunc(TreeNode[] expandedNodes) {
@@ -28,9 +35,24 @@ public class BFS implements SearchStrategy {
 
 	}
 
+//	@Override
+//	public TreeNode remove() {
+//		return  bfsQueue.remove();
+//	}
+	
 	@Override
 	public TreeNode remove() {
-		return bfsQueue.remove();
+		TreeNode node = null;
+		do{
+			try{
+			node = bfsQueue.remove();
+			// if queue is empty then  return null indicating that queue is empty  
+			}catch(NoSuchElementException e){
+				return null;
+			}
+		 }while(repeatedStatesController.isRepeated(node));
+		
+		return node;
 	}
 
 }

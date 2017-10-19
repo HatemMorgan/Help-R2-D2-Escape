@@ -1,9 +1,11 @@
 package search_strategies;
 
 import java.util.Collection;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 import Project_Problem.R2D2State;
+import Project_Problem.RepeatedStatesController;
 import main.SearchStrategy;
 import main.TreeNode;
 
@@ -11,10 +13,13 @@ public class IterativeDeepening implements SearchStrategy {
 	private Stack<TreeNode> iterDeepeningQueue;
 	private int currentDepth; 
 	private TreeNode root;
+	private RepeatedStatesController repeatedStatesController;
+
 	
 	public  IterativeDeepening() {
 		this.iterDeepeningQueue = new Stack<TreeNode>();
 		this.currentDepth = 0;
+		this.repeatedStatesController = new RepeatedStatesController();
 	}
 	
 	@Override
@@ -26,6 +31,7 @@ public class IterativeDeepening implements SearchStrategy {
 					if(iterDeepeningQueue.isEmpty() && expandedNodes[0].getDepth() > currentDepth ){
 						currentDepth++;
 						iterDeepeningQueue.push(root);
+						repeatedStatesController.flush();
 						System.out.println("Current Depth = "+currentDepth);
 						return;
 					}
@@ -54,9 +60,27 @@ public class IterativeDeepening implements SearchStrategy {
 		iterDeepeningQueue.push(root);
 	}
 
+//	@Override
+//	public TreeNode remove() {
+//		return iterDeepeningQueue.pop();
+//	}
+	
 	@Override
 	public TreeNode remove() {
-		return iterDeepeningQueue.pop();
+		TreeNode node = null;
+		do{
+			try{
+				node = iterDeepeningQueue.pop();
+			}catch(EmptyStackException e){
+				currentDepth++;
+				iterDeepeningQueue.push(root);
+				repeatedStatesController.flush();
+				System.out.println("Current Depth = "+currentDepth);
+				break;
+			}
+		 }while(repeatedStatesController.isRepeated(node));
+		
+		return node;
 	}
 
 }

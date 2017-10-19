@@ -1,7 +1,6 @@
 package Project_Problem;
 
 
-import java.lang.invoke.MethodHandles.Lookup;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -24,7 +23,6 @@ public class HelpR2D2 extends GenericSearchProblem {
 	public HelpR2D2() {
 		this.setOperators(new String[] { "N", "S", "E", "W" });
 		GenGrid();
-//		teleportalIndexes = intialGrid.getTeleportalPos();
 		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid,teleportalIndexes));
 	}
 	
@@ -167,7 +165,6 @@ public class HelpR2D2 extends GenericSearchProblem {
 					return new R2D2State(state.getX()-1, state.getY(),remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
-//		System.out.println("error North ---> "); printGrid(state.getGrid());
 		return null;
 	}
 	
@@ -286,7 +283,6 @@ public class HelpR2D2 extends GenericSearchProblem {
 					return new R2D2State(state.getX()+1, state.getY(),remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
-//		System.out.println("error South ---> "); printGrid(state.getGrid());
 		return null;
 	}
 	
@@ -405,7 +401,6 @@ public class HelpR2D2 extends GenericSearchProblem {
 					return new R2D2State(state.getX(), state.getY()+1,remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
-//		System.out.println("error East ---> "); printGrid(state.getGrid());
 		return null;
 	}
 	
@@ -523,7 +518,6 @@ public class HelpR2D2 extends GenericSearchProblem {
 					return new R2D2State(state.getX(), state.getY()-1,remainingRocks,newGrid,state.getTeleportalPos());
 			}
 		}
-//		System.out.println("error West ---> "); printGrid(state.getGrid());
 		return null;
 	}
 
@@ -547,26 +541,15 @@ public class HelpR2D2 extends GenericSearchProblem {
 		// create a new Tree node
 		for(String operator : this.getOperators()){
 			R2D2State newState = (R2D2State)this.transitionFunction(node.getState(),operator);
-//			if(newState == null)
-//				continue;
-//			System.out.println(operator+" "+newState);
-//			System.out.println();
-				// skip if newState is the same as current state if node(parameter)
+
+			// skip if newState is the same as current state if node(parameter)
 			if(newState.getX()== ((R2D2State)node.getState()).getX() && newState.getY()== ((R2D2State)node.getState()).getY())
 				continue;   //repeated states
 			
 			// create a new Tree node
 			// cost and depth are incremented by 1
 			 TreeNode  newNode = new TreeNode(node, newState, node.getDepth()+1, node.getCost()+1, operator);
-			 
-//			// check if there were a tree node previously constructed to clone it instead of creating a new one
-//			// I cloned it to keep its state as explored and/or inQueuingDS
-//			if(stateSpaceLookup[newState.getX()][newState.getY()] != null){
-//				TreeNode lookedupNode = stateSpaceLookup[newState.getX()][newState.getY()];
-//				newNode.setExplored(lookedupNode.isExplored());
-//				newNode.setInQueuingDS(lookedupNode.isInQueuingDS());
-//			}
-			
+	
 			expandedNodes[index] =  newNode;
 			index++;
 		}
@@ -613,10 +596,8 @@ public class HelpR2D2 extends GenericSearchProblem {
 
 	private void GenGrid() {
 
-		int m = RandomNumber(3, 9);
-		int n = RandomNumber(3, 9);
-//		int m = 3;
-//		int n =3;
+		int m = RandomNumber(3, 14);
+		int n = RandomNumber(3, 14);
 		grid = new GridObjects[n][m];
 //		stateSpaceLookup = new TreeNode[n][m];
 		int totalCells = (m * n) - 2;
