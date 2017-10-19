@@ -2,15 +2,23 @@ package search_strategies;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+import Project_Problem.RepeatedStatesController;
 import main.SearchStrategy;
 import main.TreeNode;
 
 public class UniformCost implements SearchStrategy {
 	
-	private Queue<TreeNode> priorityQueue = new PriorityQueue<TreeNode>(costCompartor);
+	private Queue<TreeNode> priorityQueue;
+	private RepeatedStatesController repeatedStatesController;
+
+	public UniformCost() {
+		 priorityQueue = new PriorityQueue<TreeNode>(costCompartor);
+			repeatedStatesController  = new RepeatedStatesController();
+	}	
 	
 	@Override
 	public void queuingFunc(TreeNode[] expandedNodes) {
@@ -39,9 +47,24 @@ public class UniformCost implements SearchStrategy {
 			priorityQueue.add(root);
 	}
 
+//	@Override
+//	public TreeNode remove() {
+//		return priorityQueue.poll();
+//	}
+	
 	@Override
 	public TreeNode remove() {
-		return priorityQueue.poll();
+		TreeNode node;
+		do{
+			try{
+			node = priorityQueue.remove();
+			// if queue is empty then  return null indicating that queue is empty  
+			}catch(NoSuchElementException e){
+				return null;
+			}
+		 }while(repeatedStatesController.isRepeated(node));
+		
+		return node;
 	}
 	
 	private static Comparator<TreeNode> costCompartor = new Comparator<TreeNode>() {

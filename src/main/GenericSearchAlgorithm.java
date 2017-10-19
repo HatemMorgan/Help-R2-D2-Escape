@@ -11,7 +11,9 @@ public class GenericSearchAlgorithm {
 	private static int expantionNodesNum = 0;
 	public static String[] search(SearchStrategy searchStrategy,
 			GenericSearchProblem problem, boolean visualize) throws CloneNotSupportedException, InterruptedException {
-
+		
+			((HelpR2D2)problem).printGrid(((HelpR2D2)problem).getGrid());
+			
 		/*
 		 * create an root node from initial state and add it to the queuing data
 		 * structure of search strategy
@@ -20,6 +22,12 @@ public class GenericSearchAlgorithm {
 		searchStrategy.addInitialState(root);
 		while (!searchStrategy.getQueuingDataStructure().isEmpty()) {
 			TreeNode node = searchStrategy.remove();
+			
+			// if no node returned due to handling repeated states
+			if(node == null){
+		        System.out.println("No solution");
+				return null;
+			}
 			
 			// add position of state in removed node from queue
 			expansionSequenceBuilder.append("("+((R2D2State)node.getState()).getX()+","+((R2D2State)node.getState()).getY()+") , ");			
@@ -38,7 +46,7 @@ public class GenericSearchAlgorithm {
 	
 	public static void main(String[] args) throws CloneNotSupportedException, InterruptedException {
 //		SearchStrategy dfs =new UniformCost();
-//		GenericSearchProblem help = new HelpR2D2();
+		GenericSearchProblem help = new HelpR2D2();
 //		TreeNode goal =  search(dfs, help, false );
 //	    System.out.println(goal.getDepth()+" "+goal.getDepth()+" "+goal.getParent()+" "+ goal.getState());
 		
@@ -54,33 +62,33 @@ public class GenericSearchAlgorithm {
 		GridObjects[][] g = new GridObjects[][]{{GridObjects.Agent,GridObjects.Rock,GridObjects.PressurePad},
 																		   {GridObjects.FreeSpace,GridObjects.Rock,GridObjects.Obstacle},
 																		   {GridObjects.Teleportal,GridObjects.PressurePad,GridObjects.FreeSpace}};
-		HelpR2D2 help = new HelpR2D2(g,new int[]{0,0},new int[]{2,0},2);
+		HelpR2D2 help2 = new HelpR2D2(g,new int[]{0,0},new int[]{2,0},2);
 
 		GridObjects[][] g2 = new GridObjects[][]{{GridObjects.Agent,GridObjects.Rock,GridObjects.FreeSpace,GridObjects.PressurePad},
 																			   {GridObjects.FreeSpace,GridObjects.FreeSpace,GridObjects.FreeSpace,GridObjects.Obstacle},
 																			   {GridObjects.Rock,GridObjects.Rock,GridObjects.FreeSpace,GridObjects.FreeSpace},
 																			   {GridObjects.PressurePad,GridObjects.FreeSpace,GridObjects.FreeSpace,GridObjects.Rock},
 																			   {GridObjects.Obstacle,GridObjects.PressurePad,GridObjects.Teleportal,GridObjects.PressurePad}};
-		HelpR2D2 help2 = new HelpR2D2(g2,new int[]{0,0},new int[]{4,2},4);
+		HelpR2D2 help3 = new HelpR2D2(g2,new int[]{0,0},new int[]{4,2},4);
 
 		
 		GridObjects[][] g3 = new GridObjects[][]{{GridObjects.Agent,GridObjects.FreeSpace,GridObjects.FreeSpace,GridObjects.Teleportal},
 																			 {GridObjects.FreeSpace,GridObjects.Rock,GridObjects.PressurePad,GridObjects.FreeSpace},
 																			 {GridObjects.Rock,GridObjects.Obstacle,GridObjects.FreeSpace,GridObjects.FreeSpace},
 																			 {GridObjects.PressurePad,GridObjects.FreeSpace,GridObjects.FreeSpace,GridObjects.Obstacle}};
-HelpR2D2 help3 = new HelpR2D2(g3,new int[]{0,0},new int[]{0,3},2);
+HelpR2D2 help4 = new HelpR2D2(g3,new int[]{0,0},new int[]{0,3},2);
 
 GridObjects[][] g4 = new GridObjects[][]{{GridObjects.FreeSpace,GridObjects.FreeSpace,GridObjects.Agent,GridObjects.FreeSpace},
 		 {GridObjects.FreeSpace,GridObjects.Teleportal,GridObjects.Rock,GridObjects.FreeSpace},
 		 {GridObjects.FreeSpace,GridObjects.FreeSpace,GridObjects.PressurePad,GridObjects.FreeSpace},
 		 {GridObjects.Obstacle,GridObjects.FreeSpace,GridObjects.FreeSpace,GridObjects.FreeSpace}};
-HelpR2D2 help4 = new HelpR2D2(g4,new int[]{0,2},new int[]{1,1},1);
+HelpR2D2 help5 = new HelpR2D2(g4,new int[]{0,2},new int[]{1,1},1);
 
 GridObjects[][] g5 = new GridObjects[][]{{GridObjects.Obstacle,GridObjects.FreeSpace,GridObjects.Rock,GridObjects.FreeSpace},
 		 {GridObjects.FreeSpace,GridObjects.Agent,GridObjects.FreeSpace,GridObjects.FreeSpace},
 		 {GridObjects.PressurePad,GridObjects.FreeSpace,GridObjects.FreeSpace,GridObjects.FreeSpace},
 		 {GridObjects.Teleportal,GridObjects.FreeSpace,GridObjects.Obstacle,GridObjects.FreeSpace}};
-HelpR2D2 help5 = new HelpR2D2(g5,new int[]{1,1},new int[]{3,0},1);
+HelpR2D2 help6 = new HelpR2D2(g5,new int[]{1,1},new int[]{3,0},1);
 
 //HelpR2D2 help6 = new HelpR2D2();
 //help6.printGrid(help6.getGrid());
@@ -94,30 +102,40 @@ GridObjects[][] g7 = new GridObjects[][]{{GridObjects.Teleportal,GridObjects.Obs
 		 {GridObjects.PressurePad,GridObjects.Rock,GridObjects.Agent,GridObjects.Obstacle,GridObjects.Obstacle,GridObjects.Obstacle}};
 HelpR2D2 help7 = new HelpR2D2(g7,new int[]{5,2},new int[]{0,0},2);
 		
+GridObjects[][] g8 = new GridObjects[][]{{GridObjects.FreeSpace,GridObjects.PressurePad,GridObjects.PressurePad,GridObjects.Rock,GridObjects.Rock},
+		 {GridObjects.Rock,GridObjects.Rock,GridObjects.FreeSpace,GridObjects.Rock,GridObjects.PressurePad},
+		 {GridObjects.Rock,GridObjects.FreeSpace,GridObjects.Teleportal,GridObjects.Rock,GridObjects.PressurePad},
+		 {GridObjects.PressurePad,GridObjects.FreeSpace,GridObjects.Rock,GridObjects.Rock,GridObjects.PressurePad},
+      	{GridObjects.FreeSpace,GridObjects.PressurePad,GridObjects.Agent,GridObjects.PressurePad,GridObjects.PressurePad}};
+
+HelpR2D2 help8 = new HelpR2D2(g8,new int[]{4,2},new int[]{2,2},9);
+
 //		SearchStrategy uniformCost = new UniformCost();
-//		TreeNode goal =  search(uniformCost, help6, true );
+//		String[] results  =  search(uniformCost, help, false );
 		
 //		SearchStrategy bfs = new BFS();
-//		String[] results =  search(bfs, help, true );
+//		String[] results =  search(bfs, help2, true );
 
 //		SearchStrategy dfs = new DFS();
-//		TreeNode goal =  search(dfs, help4, false );
+//		String[] results =  search(dfs, help7, false );
 		
 //		IterativeDeepening iterativeDeepening = new IterativeDeepening();
-//		TreeNode goal =  search(iterativeDeepening, help5, true);
+//		String[] results =  search(iterativeDeepening, help3, false);
 //		
 //		GreedyHeuristic1 greedyHeuristic1 = new GreedyHeuristic1(); 
-//		String[] results =  search(greedyHeuristic1, help, true );
+//		String[] results =  search(greedyHeuristic1, help3, true );
 		
 //		GreedyHeuristic2 greedyHeuristic2 = new GreedyHeuristic2(); 
-//		String[] results =  search(greedyHeuristic2, help, true );
+//		String[] results =  search(greedyHeuristic2, help3, true );
 		
-		AStarHeuristic1 aStarHeuristic1 = new AStarHeuristic1();
-		String[] results =  search(aStarHeuristic1, help, true );
+//		AStarHeuristic1 aStarHeuristic1 = new AStarHeuristic1();
+//		String[] results =  search(aStarHeuristic1, help, false );
 		
-//		AStarHeuristic2 aStarHeuristic2 = new AStarHeuristic2();
-//		TreeNode goal =  search(aStarHeuristic2, help7, true );
-
+		AStarHeuristic2 aStarHeuristic2 = new AStarHeuristic2();
+		String[] results =  search(aStarHeuristic2, help7, false );
+		
+		if(results == null)
+			return;
 		System.out.println("Sequence of moves to goal: \n"+ results[0]);
 		System.out.println("Path cost = "+ results[1]);
 		System.out.println("Number of expanded nodes = "+ results[2]);
