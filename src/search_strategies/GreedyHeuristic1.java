@@ -94,9 +94,8 @@ private Queue<TreeNode> priorityQueue = new PriorityQueue<TreeNode>(heuristicCom
 				distance2 = d;
 			}
 		}
-		
-		return distance + distance2;
-		
+		return (distance == Integer.MAX_VALUE)? 0 : distance+distance2;
+				
 	}
 	
 	

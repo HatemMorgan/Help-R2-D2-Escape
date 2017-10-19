@@ -613,10 +613,10 @@ public class HelpR2D2 extends GenericSearchProblem {
 
 	private void GenGrid() {
 
-//		int m = RandomNumber(3, 7);
-//		int n = RandomNumber(3, 7);
-		int m = 3;
-		int n =3;
+		int m = RandomNumber(3, 9);
+		int n = RandomNumber(3, 9);
+//		int m = 3;
+//		int n =3;
 		grid = new GridObjects[n][m];
 //		stateSpaceLookup = new TreeNode[n][m];
 		int totalCells = (m * n) - 2;
@@ -712,5 +712,11 @@ public class HelpR2D2 extends GenericSearchProblem {
 		}
 		return newGrid;
 	}
+
+	public GridObjects[][] getGrid() {
+		return grid;
+	}
+	
+	
 	
 }
