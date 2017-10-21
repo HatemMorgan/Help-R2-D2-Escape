@@ -9,6 +9,31 @@ import search_strategies.*;
 public class GenericSearchAlgorithm {
 	private static final StringBuilder expansionSequenceBuilder = new StringBuilder();
 	private static int expantionNodesNum = 0;
+	
+	/**
+	 * This​ ​is​ ​the​ ​generic​ ​search​ ​method​ ​which​ ​is​ ​implemented​ ​to​ ​perform​ ​the​ ​searching  techniques​ ​using​ ​general​ ​problem​ ​
+	 * and​ ​general​ ​Search​ ​strategy.​ ​The​ ​method​ ​takes as​ ​a​ ​parameter​ ​the​ ​search​ ​strategy​ ​which​ ​will​ ​handle​ ​the​ ​technique​ 
+	 * ​of​ ​the​ ​queuing function,​ ​the​ ​problem​ ​where​ ​the​ ​agent​ ​will​ ​perform​ ​the​ ​searching​ ​algorithm​ ​and​ ​a boolean​ ​which​ ​state​ ​
+	 * if​ ​we​ ​need​ ​to​ ​visualize​ ​the​ ​path​ ​to​ ​the​ ​goal​ ​after​ ​finding​ ​the  goal​ ​or​ ​we​ ​do​ ​not​ ​need.​ ​First​ ​the​ ​root​ ​node​ ​where​ ​the​ ​
+	 * initial​ ​location​ ​of​ ​the​ ​agent​ ​is  set​ ​will​ ​be​ ​pushed​ ​to​ ​the​ ​queue,​ ​then​ ​a​ ​loop​ ​will​ ​be​ ​performed​ ​in​ ​this​ ​queue​ ​until​ ​it 
+	 * is​ ​empty,​ ​for​ ​every​ ​node​ ​in​ ​the​ ​queue​ ​it​ ​will​ ​be​ ​checked​ ​if​ ​it​ ​is​ ​the​ ​goal​ ​node​ ​using the​ ​ ​goal​ ​test​ ​ function​ ​which​ ​is​ 
+	 * implemented​ ​in​ ​the​ ​search​ ​problem,​ ​if​ ​the​ ​node​ ​is  not​ ​a​ ​goal​ ​then​ ​it​ ​will​ ​be​ ​expanded​ ​using​ ​the​ ​search​ ​strategy​ 
+	 * expansion​ ​function which​ ​expand​ ​the​ ​node​ ​using​ ​the​ ​problem​ ​operators​ ​and​ ​return​ ​the​ ​children​ ​of  this​ ​node.​ ​The​ ​
+	 * ​queuing​ ​function​ of​ ​the​ ​given​ ​search​ ​strategy​ ​is​ ​responsible​ ​for inserting​ ​these​ ​expanded​ ​nodes​ ​in​ ​the​ ​queuing​ 
+	 * ​data​ ​structure.​ ​The​ ​nodes​ ​will​ ​be removed​ ​from​ ​the​ ​queue​ ​in​ ​each​ ​iteration​ ​using​ ​the​ r ​ emoving​ ​function​ ​ ​which​ ​is 
+	 * implemented​ ​in​ ​the​ ​search​ ​strategy.
+	 * ​
+	 * @param searchStrategy
+	 * @param problem
+	 * @param visualize
+	 * @return ​an​ ​array​ ​of​ ​strings​ ​which contain:  
+	 * 		1. The​ ​sequence​ ​of​ ​moves​ ​of​ ​the​ ​path​ ​from​ ​the​ ​starting​ ​position​ ​to​ ​the​ ​goal.  
+	 * 		2. The​ path​ ​cost. 
+	 * 		3. The​ number​ ​of​ ​expanded​ ​nodes. 
+	 * 
+	 * @throws CloneNotSupportedException
+	 * @throws InterruptedException
+	 */
 	public static String[] search(SearchStrategy searchStrategy,
 			GenericSearchProblem problem, boolean visualize) throws CloneNotSupportedException, InterruptedException {
 		
@@ -111,28 +136,28 @@ GridObjects[][] g8 = new GridObjects[][]{{GridObjects.FreeSpace,GridObjects.Pres
 HelpR2D2 help8 = new HelpR2D2(g8,new int[]{4,2},new int[]{2,2},9);
 
 //		SearchStrategy uniformCost = new UniformCost();
-//		String[] results  =  search(uniformCost, help, false );
+//		String[] results  =  search(uniformCost, help3, false );
 		
 //		SearchStrategy bfs = new BFS();
-//		String[] results =  search(bfs, help2, true );
+//		String[] results =  search(bfs, help3, false );
 
 //		SearchStrategy dfs = new DFS();
-//		String[] results =  search(dfs, help7, false );
+//		String[] results =  search(dfs, help3, false );
 		
 //		IterativeDeepening iterativeDeepening = new IterativeDeepening();
 //		String[] results =  search(iterativeDeepening, help3, false);
 //		
 //		GreedyHeuristic1 greedyHeuristic1 = new GreedyHeuristic1(); 
-//		String[] results =  search(greedyHeuristic1, help3, true );
+//		String[] results =  search(greedyHeuristic1, help3, false );
 		
 //		GreedyHeuristic2 greedyHeuristic2 = new GreedyHeuristic2(); 
-//		String[] results =  search(greedyHeuristic2, help3, true );
+//		String[] results =  search(greedyHeuristic2, help3, false );
 		
 //		AStarHeuristic1 aStarHeuristic1 = new AStarHeuristic1();
-//		String[] results =  search(aStarHeuristic1, help, false );
+//		String[] results =  search(aStarHeuristic1, help3, false );
 		
 		AStarHeuristic2 aStarHeuristic2 = new AStarHeuristic2();
-		String[] results =  search(aStarHeuristic2, help7, false );
+		String[] results =  search(aStarHeuristic2, help3, false );
 		
 		if(results == null)
 			return;

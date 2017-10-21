@@ -13,6 +13,14 @@ import Utility.Position;
 import main.SearchStrategy;
 import main.TreeNode;
 
+/**
+ * Greedy​ ​Search​ ,​ ​the​ ​queuing​ ​data​ ​structure​ ​is​ ​a​ ​ priority​ ​queue,​ ​ where nodes​ ​are​ ​ordered​ ​according​ ​to​ ​an​ ​evaluation​ ​
+ * function.​ ​The​ ​evaluation​ ​function​ ​is  the​ ​value​ ​of​ ​the​ ​heuristic​ ​function​ ​which​ ​is​ ​an​ ​estimate​ ​of​ ​the​ ​cheapest​ ​cost​ ​from 
+ * the​ ​current​ ​node​ ​to​ ​a​ ​goal​ ​node​ ​.​ ​The​ ​ queuingFunc​ method​ ​adds​ ​the​ ​nodes​ ​to​ ​the  priority​ ​queue​ ​ ​such​ ​that​ ​whenever​ ​a​ 
+ * ​new​ ​node​ ​is​ ​to​ ​be​ ​added,​ ​all​ ​the​ ​nodes​ ​are ordered​ ​according​ ​to​ ​the​ ​value​ ​of​ ​the​ ​evaluation​ ​function​ ​and​ ​the​ ​node​ ​with​ ​the​ ​lowest 
+ * value​ ​of​ ​the​ ​evaluation​ ​function,​ ​i.e​ ​the​ ​node​ ​with​ ​the​ ​highest​ ​priority​ ​is​ ​added​ ​to​ ​the​ ​tail  of​ ​the​ ​queue​ ​and​ ​the​ ​ remove​ 
+ * method​ ​removes​ ​the​ ​node​ ​at​ ​the​ ​tail​ ​of​ ​the​ ​queue,​ ​i.e​ ​the node​ ​with​ ​the​ ​highest​ ​priority.​ 
+ */
 public class GreedyHeuristic1 implements SearchStrategy{
 
 		
@@ -68,6 +76,16 @@ public class GreedyHeuristic1 implements SearchStrategy{
 		return node;
 	}
 	
+	/**
+	 * The​ ​first​ ​heuristic​ ​function​ ​implemented​ ​was​ ​the​ ​sum​ ​of​ ​the city​ ​block​ ​​distance​ ​from​ ​the​ ​agent’s​ ​position​ ​to​ ​the​ ​nearest​
+	 *  ​rock​ ​and​ ​the​ city​ ​block  distance​ ​from​ ​the​ ​nearest​ ​rock​ ​to​ ​the​ ​nearest​ ​pressure​ ​pad​ ​to​ ​this​ ​rock.​ ​This heuristic​ ​function​ ​
+	 *  is​ ​admissible,​ ​since​ ​the​ ​best​ ​case​ ​scenario​ ​is​ ​when​ ​all​ ​rocks​ ​have been​ ​placed​ ​on​ ​pressure​ ​pads,​ ​and​ ​all​ ​the​ ​agent​ ​has​ 
+	 *  ​to​ ​do​ ​is​ ​to​ ​move​ ​to​ ​the  teleportal.​ ​In​ ​this​ ​case​ ​the​ ​value​ ​of​ ​the​ ​heuristic​ ​function​ ​will​ ​be​ ​0​ ​since​ ​in​ ​our  implementation​ ​
+	 *  we​ ​differentiate​ ​between​ ​cells​ ​containing​ ​rocks​ ​and​ ​cells​ ​containing  rocks​ ​on​ ​pressure​ ​pads​ ​or​ ​on​ ​the​ ​teleportal.​ ​Therefore,​ ​the​ ​distance​ ​to​ ​the​ ​nearest 
+	 *  rock​ ​will​ ​be​ ​0​ ​since​ ​all​ ​rocks​ ​are​ ​on​ ​pressure​ ​pads. 
+	 * @param node
+	 * @return
+	 */
 	private static int HeuristicFun(TreeNode node) {
 		// get grid of the passed treeNode
 		GridObjects[][] grid = ((R2D2State) node.getState()).getGrid();

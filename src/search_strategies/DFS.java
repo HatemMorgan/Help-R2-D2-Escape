@@ -10,6 +10,9 @@ import java.util.Stack;
 
 import Project_Problem.RepeatedStatesController;
 
+/**
+ * Depth​ ​First​ ​Search,​ ​the​ ​queuing​ ​data​ ​structure​ ​is​ ​a​ ​ stack,​ ​ which​ ​is​ ​a  LIFO(Last​ ​In​ ​First​ ​Out)​ data​ ​structure.​
+ */
 public class DFS implements SearchStrategy {
 
    private static Stack<TreeNode> DfsQueue ;

@@ -11,6 +11,14 @@ import Project_Problem.RepeatedStatesController;
 import main.SearchStrategy;
 import main.TreeNode;
 
+/**
+ * A*​ ​Search​ ,​ ​the​ ​queuing​ ​data​ ​structure​ ​is​ ​a​ priority​ ​queue,​ ​ where​ ​nodes​ ​are  ordered​ ​according​ ​to​ ​an​ ​evaluation​ ​function.​ ​
+ * The​ ​evaluation​ ​function​ ​is​ ​the​ ​sum​ ​of  the​ ​path​ ​cost​ ​from​ ​the​ ​root​ ​to​ ​the​ ​current​ ​node​ ​and​ ​the​ ​heuristic​ ​function​ ​which​ ​is 
+ * an​ ​estimate​ ​of​ ​the​ ​cheapest​ ​cost​ ​from​ ​the​ ​current​ ​node​ ​to​ ​a​ ​goal​ ​node​ ​.​ ​The  queuingFunc​ method​ ​adds​ ​the​ ​nodes​ ​to​ ​the​ ​
+ * priority​ ​queue​ ​ ​such​ ​that​ ​whenever​ ​a​ ​new  node​ ​is​ ​to​ ​be​ ​added,​ ​all​ ​the​ ​nodes​ ​are​ ​ordered​ ​according​ ​to​ ​the​ ​value​ ​of​ ​the​ ​
+ * evaluation function​ ​and​ ​the​ ​node​ ​with​ ​the​ ​lowest​ ​value​ ​of​ ​the​ ​evaluation​ ​function,​ ​i.e​ ​the​ ​node​ ​with  the​ ​highest​ ​priority​ ​
+ * is​ ​added​ ​to​ ​the​ ​tail​ ​of​ ​the​ ​queue​ ​and​ ​the​ remove​ ​ method​ ​removes the​ ​node​ ​at​ ​the​ ​tail​ ​of​ ​the​ ​queue 
+ */
 public class AStarHeuristic2 implements SearchStrategy{
 
 		
@@ -66,6 +74,15 @@ public class AStarHeuristic2 implements SearchStrategy{
 		return node;
 	}
 	
+	/**
+	 * The​ ​second​ ​heuristic​ ​function​ ​implemented​ ​was​ ​the​ ​sum​ ​of  the​ city​ ​block​ ​ ​distance​ ​from​ ​the​ ​current​ ​node​ ​to​ ​the​ ​
+	 * teleportal,​ ​i.e​ ​the​ ​sum​ ​of​ ​the  absolute​ ​differences​ ​in​ ​the​ ​x​ ​and​ ​y​ ​directions​ ​and​ ​the​ ​number​ ​of​ ​remaining​ ​rocks. 
+	 * This​ ​heuristic​ ​function​ ​is​ admissible​ ​ ​since​ ​at​ ​any​ ​case,​ ​the​ ​agent​ ​has​ ​to​ ​move​ ​at  least​ ​one​ ​step​ ​for​ ​each​ ​remaining​ ​rock​
+	 * ​to​ ​place​ ​it​ ​on​ ​a​ ​pressure​ ​pad​ ​and​ ​then​ ​it​ ​has​ ​to  move​ ​to​ ​the​ ​teleportal,​ ​therefore​ ​the​ ​number​ ​of​ ​steps​ ​to​ ​be​ ​moved​ ​
+	 * cannot​ ​exceed  the​ ​city​ ​block​ ​distance​ ​summed​ ​with​ ​the​ ​number​ ​of​ ​remaining​ ​rocks. 
+	 * @param node
+	 * @return
+	 */
 	private static int HeuristicFun(TreeNode node) {
 		R2D2State state = (R2D2State)node.getState();
 		return state.getRemainingRocks()+ Math.abs(state.getX()-state.getTeleportalPos()[0]) + Math.abs(state.getY()-state.getTeleportalPos()[1]);

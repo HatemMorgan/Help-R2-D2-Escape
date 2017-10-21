@@ -9,6 +9,10 @@ import Project_Problem.RepeatedStatesController;
 import main.SearchStrategy;
 import main.TreeNode;
 
+/**
+ * The​ ​iterative​ ​deepening​ ​class​ ​has​ ​an​ ​instance​ ​variable  currentDepth​ which​ ​stores​ ​the​ ​current​ ​maximum​ ​depth.​ 
+ * ​The​ ​queuing​ ​data​ ​structure  for​ ​the​ ​ Iterative​ ​Deepening​ ​Search​ i ​ s​ ​a​ ​stack 
+ */
 public class IterativeDeepening implements SearchStrategy {
 	private Stack<TreeNode> iterDeepeningQueue;
 	private int currentDepth; 

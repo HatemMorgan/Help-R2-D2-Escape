@@ -20,6 +20,13 @@ public class HelpR2D2 extends GenericSearchProblem {
 	
 //	private TreeNode[][] stateSpaceLookup;
 	
+	/**
+	 * The​ ​constructor​ ​of​ ​the​ ​HelpR2D2​ ​problem​ ​in​ ​which​ ​the​ ​attributes​ ​of​ ​the​ ​problem are​ ​set.​ ​The​ ​attributes​ ​are: 
+	 * 1. The​ ​operators​ ​of​ ​the​ ​search​ ​problem​ ​are​ ​initialized​ ​which​ ​are​ ​(North,East, West,South)​ ​moves. 
+	 * 2. Generating​ ​the​ ​grid​ ​of​ ​the​ ​search​ ​problem​ ​which​ ​is​ ​a​ ​2D​ ​array​ ​consisting​ ​of the​ ​different​ ​types​ ​of​ ​the​ ​cells. 
+	 * 3. Setting​ ​the​ ​initial​ ​state​ ​of​ ​the​ ​search​ ​problem​ ​which​ ​consist​ ​of​ ​the​ ​initial position​ ​of​ ​the​ ​state,​ ​the​ ​position​ ​of​ ​the​ ​
+	 * 	teleportal​ ​and​ ​the​ ​number​ ​of​ ​the rocks. 
+	 */
 	public HelpR2D2() {
 		this.setOperators(new String[] { "N", "S", "E", "W" });
 		GenGrid();
@@ -35,7 +42,16 @@ public class HelpR2D2 extends GenericSearchProblem {
 		super.setInitialState(new R2D2State(agentInitialPos[0], agentInitialPos[1], RocksNum, grid,teleportalIndexes));
 		
 	}
-
+	
+	/**
+	 * According​ ​to​ ​the​ ​type​ ​of​ ​the​ ​operator​ ​the​ ​next​ ​state​ ​is​ ​return.​ ​For​ ​example​ ​if​ ​ ​the  operator​ ​is​ ​moving​ ​towards​ ​north​ ​the​ 
+	 * ​state​ ​of​ ​moving​ ​towards​ ​the​ ​north​ ​directions is​ ​computed​ ​and​ ​returned​ ​and​ ​so​ ​on​ ​in​ ​the​ ​different​ ​types​ ​of​ ​the​ ​operators.​ ​
+	 * The  methods​ ​which​ ​compute​ ​the​ ​next​ ​node​ ​for​ ​every​ ​operator​ ​will​ ​be​ ​explained​ ​in​ ​the  following​ ​methods: 
+	 * 1- updateWhenMovedInNorthDirection(R2D2State​ ​state, String​ ​operator)
+	 * 2- ​updateWhenMovedInEastDirection(R2D2State​ ​state,  String​ ​operator)
+	 * 3- ​updateWhenMovedInWestDirection(R2D2State​ ​state, String​ ​operator)
+	 * 4- updateWhenMovedInSouthDirection(R2D2State​ ​state,  String​ ​operator)
+	 */
 	@Override
 	public State transitionFunction(State currState, String operator) throws CloneNotSupportedException {
 		R2D2State state = (R2D2State) currState;
@@ -521,7 +537,11 @@ public class HelpR2D2 extends GenericSearchProblem {
 		return null;
 	}
 
-
+	/**
+	 * The​ ​method​ ​which​ ​check​ ​if​ ​the​ ​given​ ​node​ ​is​ ​a​ ​goal​ ​node​ ​or​ ​not.​ ​The​ ​check​ ​is  performed​ ​by​ ​checking​ ​if​ ​the​ ​position​ ​
+	 * of​ ​the​ ​agent​ ​is​ ​the​ ​same​ ​as​ ​the​ ​position​ ​of​ ​the  teleportal​ ​and​ ​the​ ​remaining​ ​rocks​ ​are​ ​zero,​ ​which​ ​means​ ​that​ ​all​ ​the​ ​
+	 * rocks​ ​are​ ​on  pressure​ ​pads.​ ​If​ ​the​ ​two​ ​checks​ ​are​ ​true​ ​the​ ​method​ ​returns​ t ​ rue​ ​ ​else,​ ​it​ ​return false​ . 
+	 */
 	@Override
 	public boolean goalTest(State s) {
 		R2D2State state = (R2D2State) s;
@@ -531,7 +551,12 @@ public class HelpR2D2 extends GenericSearchProblem {
 	}
 
 
-
+	/**
+	 * This​ ​is​ ​the​ ​method​ ​which​ ​is​ ​responsible​ ​for​ ​expanding​ ​the​ ​given​ ​node​ ​according​ ​to​ ​the  HelpR2D2​ ​problems’​ ​operators.
+	 * ​ ​For​ ​every​ ​operator​ ​the​ ​method​ ​call​ ​the​ ​ transition​ ​method with​ ​providing​ ​the​ ​current​ ​node​ ​and​ ​the​ ​operator​ ​and​ ​the​ ​
+	 *  updated​ ​node​ ​according​ ​to​ ​the operator​ ​is​ ​returned.​ ​An​ ​array​ ​of​ ​the​ ​expanded​ ​nodes​ ​according​ ​to​ ​the​ ​problem​ ​operators 
+	 *  is​ ​returned. 
+	 */
 	@Override
 	public TreeNode[] expand(TreeNode node) throws CloneNotSupportedException {
 		TreeNode[] expandedNodes = new TreeNode[4];
@@ -555,7 +580,13 @@ public class HelpR2D2 extends GenericSearchProblem {
 		}
 		return expandedNodes;
 	}
-
+	
+	/**
+	 * The​ ​visualization​ ​method​ ​which​ ​is​ ​responsible​ ​for​ ​visualizing​ ​the​ ​path​ ​from​ ​the​ ​root to​ ​the​ ​goal.​ ​The​ ​method​ ​take​ ​
+	 * as​ ​parameter​ ​the​ ​goal​ ​node​ ​when​ ​found​ ​and​ ​recurse through​ ​every​ ​parent​ ​of​ ​the​ ​goal​ ​and​ ​print​ ​the​ ​grid​ ​to​ ​visualize​ ​
+	 * the​ ​state​ ​of​ ​this​ ​grid on​ ​this​ ​parent​ ​node,​ ​the​ ​method​ ​keep​ ​recursing​ ​until​ ​arriving​ ​to​ ​the​ ​root​ ​node which​ ​is​ ​the​ ​
+	 * initial​ ​state​ ​of​ ​the​ ​agent. 
+	 */
 	public void printGoalPath(TreeNode goal) throws InterruptedException, CloneNotSupportedException{
 		// get list of actions from initial state to goal
 		List<String> actions = new ArrayList<String>();
@@ -593,7 +624,13 @@ public class HelpR2D2 extends GenericSearchProblem {
 		return 0;
 	}
 
-
+	/**
+	 * This​ ​method​ ​is​ ​responsible​ ​for​ ​generating​ ​the​ ​random​ ​grid​ ​of​ ​the​ ​search​ ​problem,  when​ ​initializing​ ​the​ ​search​ ​problem​
+	 *  ​the​ ​constructor​ ​call​ ​this​ ​method​ ​to​ ​generate the​ ​grid​ ​randomly.​ ​At​ ​the​ ​beginning​ ​the​ ​dimensions​ ​of​ ​the​ ​2D​ ​grid​ ​is​ 
+	 *  ​generated randomly​ ​using​ ​a​ ​random​ ​function​ ​which​ ​generate​ ​a​ ​random​ ​number​ ​between​ ​two preset​ ​integers.​ ​Then​ 
+	 *  ​the​ ​number​ ​of​ ​free​ ​spaces,​ ​rocks,​ ​pressure​ ​pads​ ​and obstacles​ ​are​ ​generated​ ​randomly.​ ​Then​ ​the​ ​positions​ ​of​ ​these​ 
+	 *  ​different​ ​types​ ​of cells​ ​are​ ​set​ ​randomly​ ​in​ ​the​ ​2D​ ​grid​ ​and​ ​finally​ ​the​ ​2D​ ​grid​ ​of​ ​the​ ​search​ ​problem​ ​is initialized. 
+	 */
 	private void GenGrid() {
 
 		int m = RandomNumber(3, 14);
@@ -669,7 +706,12 @@ public class HelpR2D2 extends GenericSearchProblem {
 		Random r = new Random();
 		return (r.nextInt(high - low) + low);
 	}
-
+	
+	/**
+	 * This​ ​method​ ​is​ ​using​ ​in​ ​the​ ​visualization​ ​ ​printGoalPath​ ​ ​method​ ​as​ ​it​ ​is​ ​used​ ​to  print​ ​the​ ​2D​ ​grid​ ​array​ ​in​ ​a​ ​clear​ ​
+	 * way​ ​to​ ​be​ ​able​ ​to​ ​imagine​ ​the​ ​problem​ ​in​ ​every state. 
+	 * @param grid
+	 */
 	public void printGrid(GridObjects[][] grid) {
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[i].length; j++) {
@@ -685,7 +727,15 @@ public class HelpR2D2 extends GenericSearchProblem {
 		}
 	}
 	
-
+	/**
+	 * A​ ​method​ ​used​ ​to​ ​clone​ ​the​ ​2D​ ​grid​ ​to​ ​be​ ​able​ ​to​ ​pass​ ​it​ ​from​ ​one​ ​state​ ​to​ ​another  and​ ​update​ ​it​ ​according​ ​to​ ​the​ ​
+	 * operator​ ​and​ ​the​ ​transition​ ​function.  A​ ​comparison​ ​of​ ​the​ ​performance​ ​of​ ​the​ ​different​ ​algorithms​ ​implemented​ ​in​ ​
+	 * terms​ ​of completeness,​ ​optimality,​ ​and​ ​the​ ​number​ ​of​ ​expanded​ ​node.​ ​You​ ​should​ ​comment​ ​on​ ​the differences​ ​in​ ​the​
+	 *  ​number​ ​of​ ​expanded​ ​nodes​ ​between​ ​the​ ​implemented​ ​search algorithms. 
+	 * @param grid
+	 * @return
+	 * @throws CloneNotSupportedException
+	 */
 	private static GridObjects[][]  clone(GridObjects[][] grid) throws CloneNotSupportedException {
 		GridObjects[][] newGrid = new GridObjects[grid.length][grid[0].length];
 		for (int i = 0; i < grid.length; i++) {

@@ -10,6 +10,11 @@ import Project_Problem.RepeatedStatesController;
 import main.SearchStrategy;
 import main.TreeNode;
 
+/**
+ * the​ ​queuing​ ​data​ ​structure​ ​is​ ​a​ priority  queue,​ ​ where​ ​nodes​ ​of​ ​lower​ ​path​ ​cost​ ​have​ ​higher​ ​priority​ ​than​ ​nodes​ ​with​ ​a 
+ *	higher​ ​path​ ​cost.
+ *
+ */
 public class UniformCost implements SearchStrategy {
 	
 	private Queue<TreeNode> priorityQueue;
@@ -73,10 +78,10 @@ public class UniformCost implements SearchStrategy {
 		public int compare(TreeNode node1, TreeNode node2) {
 				// return difference if they are not equal
 				if(node1.getCost() != node2.getCost()){
-					return node1.getCost() - node2.getCost();
+					return node2.getCost() - node1.getCost();
 				}else{
 					// if they are equal so order them by less depth one
-					return node1.getDepth() - node2.getDepth();
+					return node2.getDepth() - node1.getDepth();
 				}
 		}
 	};

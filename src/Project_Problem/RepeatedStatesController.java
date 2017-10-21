@@ -10,6 +10,17 @@ public class RepeatedStatesController {
 		private  Hashtable<Long,List<GridObjects[][]>> previousStatesMap 
 																							= new Hashtable<Long, List<GridObjects[][]>>();
 		
+		/**
+		 * It checks if passed parameter node’s state was a repeated state or not by checking the the previousStatesMap 
+		 * which is  Hashtable<Long,List<GridObjects[][]>> where the key is calculated using 
+		 * calculateKey(GridObjects[][] grid) method and the value is a list of 2D array representing grid. 
+		 * The list is used to store grids that have the same calculated key which rarely happens but it can occur in some 
+		 * specific cases like when using DFS.
+		 * 
+		 * @param node
+		 * 
+		 * @return boolean, true if it is a repeated node's state and false if it is a new one
+		 */
 		public boolean isRepeated(TreeNode node){
 			if(node == null || (R2D2State)node.getState() == null)
 						System.out.println(node);
